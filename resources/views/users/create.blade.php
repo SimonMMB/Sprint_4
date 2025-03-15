@@ -52,7 +52,13 @@
 
         <div class="mb-3">
             <label for="training_frequency" class="form-label">Frecuencia de Entrenamiento (días por semana)</label>
-            <input type="number" name="training_frequency" id="training_frequency" class="form-control" min="1" max="7" value="{{ old('training_frequency') }}" required>
+            <select name="training_frequency" id="training_frequency" class="form-control" required>
+                <option value="" disabled selected>Seleccionar frecuencia</option>
+                <option value="2">2 días por semana</option>
+                <option value="3">3 días por semana</option>
+                <option value="4">4 días por semana</option>
+                <option value="5">5 días por semana</option>
+            </select>
         </div>
 
         <div class="mb-3">
