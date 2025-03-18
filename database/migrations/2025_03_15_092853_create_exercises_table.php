@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('exercise_session', function (Blueprint $table) {
+        Schema::create('exercises', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('exercise_id')->constrained()->onDelete('cascade');
-            $table->foreignId('session_id')->constrained('training_sessions')->onDelete('cascade');
-            $table->timestamps();
+            $table->string('name');
+            $table->enum('muscle_group', ['shoulders', 'chest', 'biceps', 'back', 'legs', 'triceps'])->nullable();
+            $table->integer('series')->nullable();
+            $table->integer('repetitions')->nullable();
         });
     }
 
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('exercise_session');
+        Schema::dropIfExists('exercises');
     }
 };
