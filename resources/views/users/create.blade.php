@@ -41,16 +41,6 @@
         </div>
 
         <div class="mb-3">
-            <label for="objective" class="form-label">Objetivo</label>
-            <input type="text" name="objective" id="objective" class="form-control" value="{{ old('objective') }}" required>
-        </div>
-
-        <div class="mb-3">
-            <label for="experience" class="form-label">Experiencia</label>
-            <input type="text" name="experience" id="experience" class="form-control" value="{{ old('experience') }}" required>
-        </div>
-
-        <div class="mb-3">
             <label for="training_frequency" class="form-label">Frecuencia de Entrenamiento (días por semana)</label>
             <select name="training_frequency" id="training_frequency" class="form-control" required>
                 <option value="" disabled selected>Seleccionar frecuencia</option>
@@ -62,10 +52,13 @@
         </div>
 
         <div class="mb-3">
-            <label for="cycle_duration" class="form-label">Duración del Ciclo (meses)</label>
-            <select name="cycle_duration" id="cycle_duration" class="form-control" required>
+            <label for="training_duration" class="form-label">Duración del Ciclo (meses)</label>
+            <select name="training_duration" id="training_duration" class="form-control" required>
                 <option value="" disabled selected>Seleccionar duración</option>
+                <option value="2">2 meses</option>
                 <option value="3">3 meses</option>
+                <option value="4">4 meses</option>
+                <option value="5">5 meses</option>
                 <option value="6">6 meses</option>
             </select>
         </div>
@@ -87,26 +80,26 @@
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     const startDateInput = document.getElementById("start_date");
-    const cycleDurationInput = document.getElementById("cycle_duration");
+    const trainingDurationInput = document.getElementById("training_duration");
     const estimatedEndDateInput = document.getElementById("estimated_end_date");
 
     function calculateEndDate() {
         const startDateValue = startDateInput.value;
-        const cycleDurationValue = cycleDurationInput.value;
+        const trainingDurationValue = trainingDurationInput.value;
 
-        if (startDateValue && cycleDurationValue) {
+        if (startDateValue && trainingDurationValue) {
             let startDate = new Date(startDateValue);
-            startDate.setMonth(startDate.getMonth() + parseInt(cycleDurationValue));
+            startDate.setMonth(startDate.getMonth() + parseInt(trainingDurationValue));
 
             let year = startDate.getFullYear();
-            let month = String(startDate.getMonth() + 1).padStart(2, "0"); // Mes en formato MM
-            let day = String(startDate.getDate()).padStart(2, "0"); // Día en formato DD
+            let month = String(startDate.getMonth() + 1).padStart(2, "0");
+            let day = String(startDate.getDate()).padStart(2, "0");
 
             estimatedEndDateInput.value = `${year}-${month}-${day}`;
         }
     }
 
     startDateInput.addEventListener("change", calculateEndDate);
-    cycleDurationInput.addEventListener("change", calculateEndDate);
+    trainingDurationInput.addEventListener("change", calculateEndDate);
 });
 </script>

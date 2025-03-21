@@ -3,9 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Services\UserSessionService;
 
 class UserController extends Controller
 {
+    protected UserSessionService $userSessionService;
+
+    public function __construct(UserSessionService $userSessionService)
+    {
+        $this->userSessionService = $userSessionService;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -32,10 +41,8 @@ class UserController extends Controller
             'surname' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8|confirmed',
-            'objective' => 'required|string|max:255',
-            'experience' => 'required|string|max:255',
-            'training_frequency' => 'required|integer|min:1|max:7',
-            'cycle_duration' => 'required|integer|min:1',
+            'training_frequency' => 'required|integer|between:2,5',
+            'training_duration' => 'required|integer|between:2,6',
             'start_date' => 'required|date',
             'estimated_end_date' => 'required|date|after:start_date',
         ]);
@@ -45,15 +52,15 @@ class UserController extends Controller
             'surname' => $validated['surname'],
             'email' => $validated['email'],
             'password' => bcrypt($validated['password']),
-            'objective' => $validated['objective'],
-            'experience' => $validated['experience'],
             'training_frequency' => $validated['training_frequency'],
-            'cycle_duration' => $validated['cycle_duration'],
+            'training_duration' => $validated['training_duration'],
             'start_date' => $validated['start_date'],
             'estimated_end_date' => $validated['estimated_end_date'],
         ]);
 
-        return redirect()->route('users.index')->with('success', 'Usuario creado correctamente.');
+        $this->userSessionService->createUserProgram($user);
+
+        return redirect()->route('users.show', $user->id)->with('success', 'Usuario registrado y sesiones generadas');
     }
 
 

@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users_sessions', function (Blueprint $table) {
+        Schema::create('user_sessions', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('program_id')->constrained('programs')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('training_session_id')->constrained('training_sessions')->onDelete('cascade');
             $table->date('estimated_date')->nullable();
             $table->enum('status', ['pending', 'completed']);
             $table->string('comments')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('exercise_session');
-    }
+        Schema::dropIfExists('user_sessions');
+    }  
 };

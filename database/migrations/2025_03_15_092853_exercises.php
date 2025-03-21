@@ -17,6 +17,7 @@ return new class extends Migration
             $table->enum('muscle_group', ['shoulders', 'chest', 'biceps', 'back', 'legs', 'triceps'])->nullable();
             $table->integer('series')->nullable();
             $table->integer('repetitions')->nullable();
+            $table->timestamps();
         });
     }
 

@@ -7,4 +7,6 @@ Route::get('/', function () {
 });
 
 Route::resource('users', UserController::class);
+Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
+
 ?>

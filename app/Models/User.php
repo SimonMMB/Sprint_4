@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -22,10 +23,8 @@ class User extends Authenticatable
         'surname',
         'email',
         'password',
-        'objective',
-        'experience',
         'training_frequency',
-        'cycle_duration',
+        'training_duration',
         'start_date',
         'estimated_end_date',
     ];
@@ -51,5 +50,10 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function sessions(): HasMany
+    {
+        return $this->hasMany(UserSession::class);
     }
 }
