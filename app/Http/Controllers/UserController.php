@@ -60,7 +60,7 @@ class UserController extends Controller
 
         $this->userSessionService->createUserProgram($user);
 
-        return redirect()->route('users.show', $user->id)->with('success', 'Usuario registrado y sesiones generadas');
+        return redirect()->route('program.show', $user->program->id)->with('success', 'Usuario registrado y sesiones generadas');
     }
 
 

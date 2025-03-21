@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Carbon\Carbon; 
 
 class UserSession extends Model
 {
@@ -20,6 +21,7 @@ class UserSession extends Model
         'status',
         'comments'
     ];
+    protected $dates = ['estimated_date'];
 
     public function user(): BelongsTo
     {
