@@ -9,12 +9,22 @@ use App\Http\Controllers\SessionController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
-Route::post('/users', [UserController::class, 'store'])->name('users.store');
-Route::get('/program/{program}', [ProgramController::class, 'show'])->name('program.show');
-Route::get('/session/{session}', [SessionController::class, 'show'])->name('session.show');
+
+Route::controller(UserController::class)->group(function () {
+    Route::get('/users/create', 'create')->name('users.create');
+    Route::post('/users', 'store')->name('users.store');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/complete-profile', [UserController::class, 'completeProfile'])->name('users.complete-profile');
+    Route::post('/update-profile', [UserController::class, 'updateProfile'])->name('users.update-profile');
+    Route::get('/program/{program}', [ProgramController::class, 'show'])->name('program.show');
+    Route::get('/session/{session}', [SessionController::class, 'show'])->name('session.show');
 
 
+    Route::resource('programs', ProgramController::class)->except(['show']);
+    Route::resource('sessions', SessionController::class)->except(['show']);
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');

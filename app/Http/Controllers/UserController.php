@@ -37,30 +37,42 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'surname' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8|confirmed',
+        ]);
+
+        $user = User::create([
+            'email' => $validated['email'],
+            'password' => bcrypt($validated['password']),
+        ]);
+
+        auth()->login($user);
+
+        return redirect()->route('users.complete-profile');
+    }
+
+    public function completeProfile()
+    {
+        return view('users.complete-profile');
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'surname' => 'required|string|max:255',
             'training_frequency' => 'required|integer|between:2,5',
             'training_duration' => 'required|integer|between:2,6',
             'start_date' => 'required|date',
             'estimated_end_date' => 'required|date|after:start_date',
         ]);
 
-        $user = User::create([
-            'name' => $validated['name'],
-            'surname' => $validated['surname'],
-            'email' => $validated['email'],
-            'password' => bcrypt($validated['password']),
-            'training_frequency' => $validated['training_frequency'],
-            'training_duration' => $validated['training_duration'],
-            'start_date' => $validated['start_date'],
-            'estimated_end_date' => $validated['estimated_end_date'],
-        ]);
-
+        $user = auth()->user();
+        $user->update($validated);
+        
         $this->userSessionService->createUserProgram($user);
 
-        return redirect()->route('program.show', $user->program->id)->with('success', 'Usuario registrado y sesiones generadas');
+        return redirect()->route('program.show', $user->program->id)->with('success', 'Perfil completado y sesiones generadas.');
     }
 
 
