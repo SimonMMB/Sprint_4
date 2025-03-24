@@ -75,7 +75,6 @@ class UserController extends Controller
         return redirect()->route('program.show', $user->program->id)->with('success', 'Perfil completado y sesiones generadas.');
     }
 
-
     /**
      * Display the specified resource.
      */

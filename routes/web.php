@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\ExerciseController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -20,7 +21,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/update-profile', [UserController::class, 'updateProfile'])->name('users.update-profile');
     Route::get('/program/{program}', [ProgramController::class, 'show'])->name('program.show');
     Route::get('/session/{session}', [SessionController::class, 'show'])->name('session.show');
-
+    Route::patch('/session/{session}/{status_exercise}', [SessionController::class, 'completeExercise'])->name('exercise-session.complete');
+    Route::patch('/session/{session}', [SessionController::class, 'completeSession'])->name('user-session.complete');
 
     Route::resource('programs', ProgramController::class)->except(['show']);
     Route::resource('sessions', SessionController::class)->except(['show']);

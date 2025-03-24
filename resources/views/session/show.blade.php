@@ -13,21 +13,47 @@
                 <th class="px-4 py-2 border border-gray-300 text-left">Grupo Muscular</th>
                 <th class="px-4 py-2 border border-gray-300 text-left">Series</th>
                 <th class="px-4 py-2 border border-gray-300 text-left">Repeticiones</th>
+                <th class="px-4 py-2 border border-gray-300 text-left">Estado</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($session->trainingSessions as $trainingSession)
+            @foreach ($session->trainingSessions as $index => $trainingSession)
                 <tr class="border-b border-gray-200">
                     <td class="px-4 py-2">{{ $trainingSession->exercise->name }}</td>
                     <td class="px-4 py-2">{{ $trainingSession->exercise->muscle_group }}</td>
                     <td class="px-4 py-2">{{ $trainingSession->exercise->series }}</td>
                     <td class="px-4 py-2">{{ $trainingSession->exercise->repetitions }}</td>
+                    <td class="px-4 py-2">
+                    @php
+                        $statusField = 'status_exercise_' . ($index + 1);
+                    @endphp
+                    {{ $session->$statusField }}
+                    </td>
+                    <td class="px-4 py-2">
+                        <form action="{{ route('exercise-session.complete', [$session->id, $index]) }}" method="POST">
+                            @csrf
+                            @method('PATCH')
+                            <button type="submit" class="bg-green-500 text-white py-1 px-4 rounded hover:bg-green-600">
+                                Marcar ejercicio como completado
+                            </button>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
 
     <p class="mt-4"><strong>Estado:</strong> {{ $session->status }}</p>
+
+    <td class="px-4 py-2">
+        <form action="{{ route('user-session.complete', $session->id) }}" method="POST">
+            @csrf
+            @method('PATCH')
+            <button type="submit" class="bg-green-500 text-white py-1 px-4 rounded hover:bg-green-600">
+                Marcar sesión como completada
+            </button>
+        </form>
+    </td>
 
     <a href="{{ route('program.show', $session->program_id) }}" class="text-blue-500 hover:underline">Volver al Programa</a>
 </div>

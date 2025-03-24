@@ -17,6 +17,12 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->date('estimated_date')->nullable();
             $table->enum('status', ['pending', 'completed']);
+            $table->enum('status_exercise_1', ['pending', 'completed']);
+            $table->enum('status_exercise_2', ['pending', 'completed']);
+            $table->enum('status_exercise_3', ['pending', 'completed']);
+            $table->enum('status_exercise_4', ['pending', 'completed']);
+            $table->enum('status_exercise_5', ['pending', 'completed']);
+            $table->enum('status_exercise_6', ['pending', 'completed']);
             $table->string('comments')->nullable();
             $table->timestamps();
         });

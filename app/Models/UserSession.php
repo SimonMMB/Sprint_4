@@ -19,6 +19,12 @@ class UserSession extends Model
         'user_id',
         'estimated_date',
         'status',
+        'status_exercise_1', 
+        'status_exercise_2', 
+        'status_exercise_3',
+        'status_exercise_4', 
+        'status_exercise_5', 
+        'status_exercise_6',
         'comments'
     ];
     protected $dates = ['estimated_date'];
