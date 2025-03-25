@@ -28,8 +28,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->route('program.show', auth()->user()->program->id)->with('success', 'Bienvenido de nuevo, ¡tus sesiones están listas!');
-
+        return redirect()->route('dashboard');
     }
 
     /**
