@@ -1,7 +1,7 @@
 <div class="container">
     <h1>Detalles de la Sesión</h1>
 
-    <p><strong>Sesión:</strong> {{ $session->id }}</p>
+    <p><strong>Sesión:</strong> {{ $session->number_of_session }}</p>
     <p><strong>Fecha Estimada:</strong> {{ $session->estimated_date }}</p>
 
     <h3 class="mt-4 mb-2 text-lg font-semibold">Ejercicios</h3>

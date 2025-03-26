@@ -32,6 +32,7 @@ class UserSessionService
         $totalWeeks = $user->training_duration * 4;
         $sessionsPerWeek = $user->training_frequency;
         $startDate = new DateTime($user->start_date);
+        $sessionCounter = 1;
 
         for ($week = 0; $week < $totalWeeks; $week++) {
 
@@ -42,6 +43,7 @@ class UserSessionService
                 }
 
                 $userSession = UserSession::create([
+                    'number_of_session' => $sessionCounter,
                     'program_id' => $program->id,
                     'user_id' => $user->id,
                     'estimated_date' => $startDate,
@@ -51,11 +53,12 @@ class UserSessionService
 
                 $this->assignExercisesToSession($userSession);
                 $startDate->modify('+1 day');
+                $sessionCounter++;
             }
         }
     }
 
-    private function assignExercisesToSession($userSession)
+    private function assignExercisesToSession(UserSession $userSession)
     {
         $muscleGroups = Exercise::select('muscle_group')->distinct()->pluck('muscle_group'); 
         $exercises = collect();
@@ -74,5 +77,38 @@ class UserSessionService
                 'exercise_id' => $exercise->id
             ]);
         }
+    }
+
+    public function completeExercisesAndSession(int $userSessionId, int $index)
+    {
+        $userSession = UserSession::findOrFail($userSessionId);
+        $statusField = 'status_exercise_' . ($index + 1);
+        $userSession->update([$statusField => 'completed']);
+       
+        $allExercisesCompleted = true;
+
+        for ($i = 1; $i <= 6; $i++) {
+            $statusField = 'status_exercise_' . $i;
+            if ($userSession[$statusField] === 'pending') {
+                $allExercisesCompleted = false;
+            }
+        }
+
+        if ($allExercisesCompleted) {
+            $userSession->update(['status' => 'completed']);
+        }
+
+        $userSession->save();
+    }
+
+    public function updateCompletedSessions(Program $program)
+    {
+        $sessions = UserSession::where('program_id', $program->id)->get();
+        $completedSessions = $sessions->filter(function($session) {
+            return $session->status == 'completed';
+        })->count();
+        $program->completed_sessions = $completedSessions;
+        $program->remaining_sessions = $program->total_sessions - $completedSessions;
+        $program->save();
     }
 }

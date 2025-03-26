@@ -5,19 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Program;
 use App\Models\UserSession;
+use App\Services\UserSessionService;
 
 class ProgramController extends Controller
 {
+    protected UserSessionService $userSessionService;
+
+    public function __construct(UserSessionService $userSessionService)
+    {
+        $this->userSessionService = $userSessionService;
+    }
     
     public function show(Program $program)
     {
-        $sessions = UserSession::with(['trainingSessions.exercise'])->where('program_id', $program->id)->get();
-        $completedSessions = $sessions->filter(function($session) {
-            return $session->status == 'completed';
-        })->count();
-        $program->completed_sessions = $completedSessions;
-        $program->remaining_sessions = $program->total_sessions - $completedSessions;
-        $program->save();
+        $this->userSessionService->updateCompletedSessions($program);
+        $sessions = UserSession::where('program_id', $program->id)->paginate(10);;
 
         return view('program.show', compact('program', 'sessions'));
     }

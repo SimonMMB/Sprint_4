@@ -4,36 +4,29 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\UserSession;
+use App\Services\UserSessionService;
 
 class SessionController extends Controller
 {
+    protected UserSessionService $userSessionService;
+
+    public function __construct(UserSessionService $userSessionService)
+    {
+        $this->userSessionService = $userSessionService;
+    }
+
     public function show(UserSession $session)
     {
         return view('session.show', compact('session'));
     }
 
-    public function completeExercise(int $userSessionId, int $index)
+    public function update(int $userSessionId, int $index)
     {
-        $userSession = UserSession::findOrFail($userSessionId);
-        $statusField = 'status_exercise_' . ($index + 1);
-        $userSession->update([$statusField => 'completed']);
-       
-        $allExercisesCompleted = true;
+        $this->userSessionService->completeExercisesAndSession($userSessionId, $index);
 
-        for ($i = 1; $i <= 6; $i++) {
-            $statusField = 'status_exercise_' . $i;
-            if ($userSession[$statusField] === 'pending') {
-                $allExercisesCompleted = false;
-            }
-        }
-
-        if ($allExercisesCompleted) {
-            $userSession->update(['status' => 'completed']);
-        }
-
-        $userSession->save();
-
-        return redirect()->route('session.show', $userSession->id);
+        return redirect()->route('session.show', $userSessionId);
     }
+
+    
 
 }

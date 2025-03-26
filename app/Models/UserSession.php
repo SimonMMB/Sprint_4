@@ -15,6 +15,7 @@ class UserSession extends Model
     use HasFactory;
 
     protected $fillable = [
+        'number_of_session',
         'program_id',
         'user_id',
         'estimated_date',

@@ -23,7 +23,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
     Route::get('/program/{program}', [ProgramController::class, 'show'])->name('program.show');
     Route::get('/session/{session}', [SessionController::class, 'show'])->name('session.show');
-    Route::patch('/session/{session}/{status_exercise}', [SessionController::class, 'completeExercise'])->name('exercise-session.complete');
+    Route::patch('/session/{session}/{status_exercise}', [SessionController::class, 'update'])->name('exercise-session.complete');
 
     Route::resource('programs', ProgramController::class)->except(['show']);
     Route::resource('sessions', SessionController::class)->except(['show']);
