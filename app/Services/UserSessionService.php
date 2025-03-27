@@ -2,9 +2,10 @@
 
 namespace App\Services;
 
+use Illuminate\Http\Request;
 use App\Models\Program;
 use App\Models\UserSession;
-use App\Models\TrainingSession;
+use App\Models\SessionExercise;
 use App\Models\Exercise;
 use App\Models\User;
 use DateTime;
@@ -72,24 +73,33 @@ class UserSessionService
         }
 
         foreach ($exercises as $exercise) {
-            TrainingSession::create([
+            SessionExercise::create([
                 'user_session_id' => $userSession->id,
-                'exercise_id' => $exercise->id
+                'exercise_id' => $exercise->id,
+                'status' => 'pending'
             ]);
         }
     }
 
-    public function completeExercisesAndSession(int $userSessionId, int $index)
+    public function completeExercisesAndSession(Request $request, int $userSessionId, int $sessionExerciseId)
     {
         $userSession = UserSession::findOrFail($userSessionId);
-        $statusField = 'status_exercise_' . ($index + 1);
-        $userSession->update([$statusField => 'completed']);
-       
+        $sessionExercise = SessionExercise::findOrFail($sessionExerciseId);
+
+        if ($sessionExercise->status != 'completed') {
+            $request->validate([
+                'lifted_weight' => 'required|integer|min:1'
+            ]);
+            $sessionExercise->update([
+                'lifted_weight' => $request->lifted_weight,
+                'status' => 'completed'
+            ]);
+        }
+        
         $allExercisesCompleted = true;
 
-        for ($i = 1; $i <= 6; $i++) {
-            $statusField = 'status_exercise_' . $i;
-            if ($userSession[$statusField] === 'pending') {
+        foreach ($userSession->sessionExercises as $sessionExercise) {
+            if ($sessionExercise->status === 'pending') {
                 $allExercisesCompleted = false;
             }
         }

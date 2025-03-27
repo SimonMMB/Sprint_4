@@ -20,13 +20,11 @@ class SessionController extends Controller
         return view('session.show', compact('session'));
     }
 
-    public function update(int $userSessionId, int $index)
+    public function update(Request $request, int $userSessionId, int $index)
     {
-        $this->userSessionService->completeExercisesAndSession($userSessionId, $index);
+        $this->userSessionService->completeExercisesAndSession($request, $userSessionId, $index);
 
         return redirect()->route('session.show', $userSessionId);
     }
-
     
-
 }

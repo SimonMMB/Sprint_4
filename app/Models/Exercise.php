@@ -17,8 +17,8 @@ class Exercise extends Model
         'repetitions',
     ];
 
-    public function trainingSessions(): HasMany
+    public function sessionExercises(): HasMany
     {
-        return $this->hasMany(TrainingSession::class);
+        return $this->hasMany(SessionExercise::class);
     }
 }

@@ -20,12 +20,6 @@ class UserSession extends Model
         'user_id',
         'estimated_date',
         'status',
-        'status_exercise_1', 
-        'status_exercise_2', 
-        'status_exercise_3',
-        'status_exercise_4', 
-        'status_exercise_5', 
-        'status_exercise_6',
         'comments'
     ];
     protected $dates = ['estimated_date'];
@@ -40,8 +34,8 @@ class UserSession extends Model
         return $this->belongsTo(Program::class);
     }
 
-    public function trainingSessions(): HasMany
+    public function sessionExercises(): HasMany
     {
-        return $this->hasMany(TrainingSession::class);
+        return $this->hasMany(SessionExercise::class);
     }
 }

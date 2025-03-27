@@ -6,8 +6,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\HomeController;
+use App\Models\Exercise;
 
-
+Route::view('/test-chart', 'test-chart');
 Route::get('/', function () {
     return view('welcome');
 });
@@ -23,7 +24,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
     Route::get('/program/{program}', [ProgramController::class, 'show'])->name('program.show');
     Route::get('/session/{session}', [SessionController::class, 'show'])->name('session.show');
-    Route::patch('/session/{session}/{status_exercise}', [SessionController::class, 'update'])->name('exercise-session.complete');
+    Route::patch('/session/{session}/{session_exercise}', [SessionController::class, 'update'])->name('session-exercise.complete');
+    Route::get('/exercises/{exercise}/progress', function(Exercise $exercise) {
+        return view('exercise.progress', ['exercise' => $exercise]);
+    })->name('exercises.progress');
 
     Route::resource('programs', ProgramController::class)->except(['show']);
     Route::resource('sessions', SessionController::class)->except(['show']);
