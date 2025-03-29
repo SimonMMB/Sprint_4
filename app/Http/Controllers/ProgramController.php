@@ -16,6 +16,28 @@ class ProgramController extends Controller
         $this->userSessionService = $userSessionService;
     }
     
+    public function create()
+    {
+        return view('program.create');
+    }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'training_frequency' => 'required|integer|between:2,5',
+            'training_duration' => 'required|integer|between:2,6',
+            'start_date' => 'required|date',
+            'estimated_end_date' => 'required|date|after:start_date',
+        ]);
+
+        $user = auth()->user();
+
+        $this->userSessionService->createUserProgram($user, $validated['training_frequency'], $validated['training_duration'], $validated['start_date'], $validated['estimated_end_date']);
+
+        return redirect()->route('dashboard');
+    }
+
+
     public function show(Program $program)
     {
         $this->userSessionService->updateCompletedSessions($program);

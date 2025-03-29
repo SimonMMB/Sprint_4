@@ -13,10 +13,14 @@ return new class extends Migration
     {
         Schema::create('programs', function (Blueprint $table) {
             $table->id();
+            $table->integer('training_frequency');
+            $table->integer('training_duration');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->integer('total_sessions');
+            $table->date('start_date')->nullable();
+            $table->date('estimated_end_date')->nullable();
+            $table->integer('total_sessions')->nullable();
             $table->integer('completed_sessions')->default(0);
-            $table->integer('remaining_sessions');
+            $table->integer('remaining_sessions')->nullable();
             $table->timestamps();
         });
     }

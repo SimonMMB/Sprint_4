@@ -13,10 +13,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('surname')->nullable();
-            $table->integer('training_frequency')->nullable();
-            $table->integer('training_duration')->nullable();
             $table->date('start_date')->nullable();
-            $table->date('estimated_end_date')->nullable();
         });
     }
 
@@ -26,7 +23,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['surname', 'training_frequency', 'training_duration', 'start_date', 'estimated_end_date']);
+            $table->dropColumn(['surname', 'start_date']);
         });
  
     }

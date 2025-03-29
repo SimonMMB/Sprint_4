@@ -82,6 +82,12 @@
                 </table>
             </div>
         </div>
+
+        <form action="{{ route('program.destroy', $program->id) }}" method="POST" onsubmit="return confirm('¿Eliminar este programa? ¡Esta acción no se puede deshacer!')">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-danger">Eliminar Programa</button>
+        </form>
         
         @if($sessions->hasPages())
         <div class="mt-6 bg-white shadow-lg rounded-xl overflow-hidden">

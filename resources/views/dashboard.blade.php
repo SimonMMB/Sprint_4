@@ -21,6 +21,14 @@
                         <p class="text-gray-600 dark:text-gray-300 mt-4">No tienes un programa de entrenamiento aún.</p>
                     @endif
                 </div>
+
+                <div class="p-6">
+                        <a href="{{ route('program.create') }}" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
+                            Crea un plan de entrenamiento
+                        </a>
+                </div>
+
+                
             </div>
         </div>
     </div>

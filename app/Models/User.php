@@ -23,11 +23,7 @@ class User extends Authenticatable
         'name',
         'surname',
         'email',
-        'password',
-        'training_frequency',
-        'training_duration',
-        'start_date',
-        'estimated_end_date',
+        'password'
     ];
  
     /**

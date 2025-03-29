@@ -10,7 +10,11 @@ class Program extends Model
     use HasFactory;
 
     protected $fillable = [
+        'training_frequency',
+        'training_duration',
         'user_id',
+        'start_date',
+        'estimated_end_date',
         'total_sessions',
         'completed_sessions',
         'remaining_sessions',

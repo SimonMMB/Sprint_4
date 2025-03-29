@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Program;
 use App\Services\UserSessionService;
 
 class UserController extends Controller
@@ -61,16 +62,12 @@ class UserController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'surname' => 'required|string|max:255',
-            'training_frequency' => 'required|integer|between:2,5',
-            'training_duration' => 'required|integer|between:2,6',
-            'start_date' => 'required|date',
-            'estimated_end_date' => 'required|date|after:start_date',
         ]);
 
         $user = auth()->user();
         $user->update($validated);
         
-        $this->userSessionService->createUserProgram($user);
+        //$this->userSessionService->createUserProgram($user);
 
         return redirect()->route('dashboard');
     }
@@ -104,6 +101,10 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = auth()->user();
+        $program = Program::where('id', $id)->where('user_id', $user->id)->firstOrFail();
+        $program->delete();
+        $user->update(['training_frequency' => null, 'training_duration' => null]);
+        return redirect()->route('users.complete-profile');
     }
 }

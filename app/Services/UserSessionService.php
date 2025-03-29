@@ -12,14 +12,18 @@ use DateTime;
 
 class UserSessionService
 {
-    public function createUserProgram(User $user)
+    public function createUserProgram(User $user, int $training_frequency, int $training_duration, string $start_date, string $estimated_end_date)
     {
-        $totalWeeks = $user->training_duration * 4;
-        $sessionsPerWeek = $user->training_frequency;
+        $totalWeeks = $training_duration * 4;
+        $sessionsPerWeek = $training_frequency;
         $totalSessions = $sessionsPerWeek * $totalWeeks;
 
         $program = Program::create([
+            'training_frequency' => $training_frequency,
+            'training_duration' => $training_duration,
             'user_id' => $user->id,
+            'start_date' => $start_date,
+            'estimated_end_date' => $estimated_end_date,
             'total_sessions' => $totalSessions,
             'completed_sessions' => 0,
             'remaining_sessions' => $totalSessions
@@ -30,9 +34,9 @@ class UserSessionService
 
     public function createUserSessions(User $user, Program $program)
     {
-        $totalWeeks = $user->training_duration * 4;
-        $sessionsPerWeek = $user->training_frequency;
-        $startDate = new DateTime($user->start_date);
+        $totalWeeks = $program->training_duration * 4;
+        $sessionsPerWeek = $program->training_frequency;
+        $startDate = new DateTime($program->start_date);
         $sessionCounter = 1;
 
         for ($week = 0; $week < $totalWeeks; $week++) {
