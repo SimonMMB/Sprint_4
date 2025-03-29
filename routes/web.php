@@ -19,18 +19,19 @@ Route::controller(UserController::class)->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/complete-profile', [UserController::class, 'completeProfile'])->name('users.complete-profile');
-    Route::post('/update-profile', [UserController::class, 'updateProfile'])->name('users.update-profile');
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
     Route::get('/program', [ProgramController::class, 'create'])->name('program.create');
     Route::post('/store-program', [ProgramController::class, 'store'])->name('program.store');
+    Route::delete('/program/{id}', [ProgramController::class, 'destroy'])->name('program.destroy');
+    Route::get('/my-programs', [ProgramController::class, 'index'])->name('programs.index');
     Route::get('/program/{program}', [ProgramController::class, 'show'])->name('program.show');
     Route::get('/session/{session}', [SessionController::class, 'show'])->name('session.show');
     Route::patch('/session/{session}/{session_exercise}', [SessionController::class, 'update'])->name('session-exercise.complete');
     Route::get('/exercises/{exercise}/progress', function(Exercise $exercise) {
         return view('exercise.progress', ['exercise' => $exercise]);
     })->name('exercises.progress');
-    Route::delete('/program/{id}', [UserController::class, 'destroy'])->name('program.destroy');
+    
+    
 
     Route::resource('programs', ProgramController::class)->except(['show']);
     Route::resource('sessions', SessionController::class)->except(['show']);

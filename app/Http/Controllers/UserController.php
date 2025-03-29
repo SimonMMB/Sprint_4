@@ -38,38 +38,22 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'surname' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8|confirmed',
         ]);
 
         $user = User::create([
+            'name' => $validated['name'],
+            'surname' => $validated['surname'],
             'email' => $validated['email'],
             'password' => bcrypt($validated['password']),
         ]);
 
         auth()->login($user);
 
-        return redirect()->route('users.complete-profile');
-    }
-
-    public function completeProfile()
-    {
-        return view('users.complete-profile');
-    }
-
-    public function updateProfile(Request $request)
-    {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'surname' => 'required|string|max:255',
-        ]);
-
-        $user = auth()->user();
-        $user->update($validated);
-        
-        //$this->userSessionService->createUserProgram($user);
-
-        return redirect()->route('dashboard');
+        return redirect()->route('dashboard'); // O la ruta que prefieras
     }
 
     /**
@@ -99,12 +83,8 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy()
     {
-        $user = auth()->user();
-        $program = Program::where('id', $id)->where('user_id', $user->id)->firstOrFail();
-        $program->delete();
-        $user->update(['training_frequency' => null, 'training_duration' => null]);
-        return redirect()->route('users.complete-profile');
+
     }
 }

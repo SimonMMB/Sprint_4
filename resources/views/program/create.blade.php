@@ -39,6 +39,12 @@
 </div>
 
 <button type="submit">Crear nuevo programa</button>
+<br>
+
+<a href="{{ route('dashboard') }}" 
+    class="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out ml-4">
+    ← Volver al Dashboard
+</a>
 
 </form>
 

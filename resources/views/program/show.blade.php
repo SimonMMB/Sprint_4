@@ -88,6 +88,21 @@
             @method('DELETE')
             <button type="submit" class="btn btn-danger">Eliminar Programa</button>
         </form>
+
+        <!-- Botones de navegación -->
+        <div class="mt-6 flex justify-between">
+            <!-- Botón para volver al index -->
+            <a href="{{ route('programs.index') }}" 
+            class="inline-block bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
+                ← Volver a mis programas
+            </a>
+            
+            <!-- Botón para ir al dashboard -->
+            <a href="{{ route('dashboard') }}" 
+            class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
+                Ir al Dashboard
+            </a>
+        </div>
         
         @if($sessions->hasPages())
         <div class="mt-6 bg-white shadow-lg rounded-xl overflow-hidden">

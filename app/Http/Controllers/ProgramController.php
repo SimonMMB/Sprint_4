@@ -37,6 +37,13 @@ class ProgramController extends Controller
         return redirect()->route('dashboard');
     }
 
+    public function index()
+    {
+        $user = auth()->user();
+        $programs = Program::where('user_id', $user->id)->paginate(10);
+        return view('program.index', compact('programs'));
+    }
+
 
     public function show(Program $program)
     {
@@ -44,6 +51,15 @@ class ProgramController extends Controller
         $sessions = UserSession::where('program_id', $program->id)->paginate(10);;
 
         return view('program.show', compact('program', 'sessions'));
+    }
+
+    public function destroy(string $id)
+    {
+        $user = auth()->user();
+        $program = Program::where('id', $id)->where('user_id', $user->id)->firstOrFail();
+        $program->delete();
+        $user->update(['training_frequency' => null, 'training_duration' => null]);
+        return redirect()->route('programs.index')->with('success', 'Programa eliminado correctamente');
     }
 
 }
