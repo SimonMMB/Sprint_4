@@ -1,118 +1,118 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Programa de Entrenamiento</title>
-    @vite(['resources/css/app.css'])
-</head>
-<body class="bg-gray-50 min-h-screen">
-    <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-        <!-- Header con gradiente -->
-        <div class="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-xl shadow-lg overflow-hidden mb-8">
-            <div class="p-6 md:p-8 text-center">
-                <h1 class="text-3xl md:text-4xl font-bold text-white">Programa de Entrenamiento</h1>
+<x-app-layout>
+    <!-- Contenedor con imagen de fondo -->
+    <div class="min-h-screen bg-cover bg-center py-12" style="background-image: url('{{ asset('storage/hot.avif') }}')">
+        <!-- Tarjeta central -->
+        <div class="w-full max-w-4xl mx-4 bg-white/70 dark:bg-gray-800/70 rounded-lg shadow-xl overflow-hidden transition-all duration-500 hover:shadow-2xl backdrop-blur-md">
+            <!-- Header naranja translúcido -->
+            <div class="bg-orange-500/80 dark:bg-orange-600/80 p-4 text-center">
+                <h1 class="text-2xl font-bold text-white">Programa de Entrenamiento</h1>
             </div>
-        </div>
 
-        <!-- Estadísticas en cards -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <!-- Sesiones Totales -->
-            <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-blue-500">
-                <h3 class="text-lg font-medium text-gray-500">Sesiones totales</h3>
-                <p class="mt-2 text-3xl font-bold text-gray-900">{{ $program->total_sessions }}</p>
-            </div>
-            <!-- Sesiones Restantes -->
-            <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-orange-500">
-                <h3 class="text-lg font-medium text-gray-500">Restantes</h3>
-                <p class="mt-2 text-3xl font-bold text-orange-600">{{ $program->remaining_sessions }}</p>
-            </div>
-             <!-- Sesiones Completadas -->
-            <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-green-500">
-                <h3 class="text-lg font-medium text-gray-500">Completadas</h3>
-                <p class="mt-2 text-3xl font-bold text-green-600">{{ $program->completed_sessions }}</p>
-            </div>
-        </div>
+            <!-- Contenido -->
+            <div class="p-6">
+                <!-- Estadísticas en cards -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <!-- Sesiones Totales -->
+                    <div class="bg-white/80 dark:bg-gray-700/80 rounded-lg shadow-md p-6 border-l-4 border-blue-500 backdrop-blur-sm">
+                        <h3 class="text-lg font-medium text-gray-700 dark:text-gray-300">Sesiones totales</h3>
+                        <p class="mt-2 text-3xl font-bold text-gray-900 dark:text-white">{{ $program->total_sessions }}</p>
+                    </div>
+                    <!-- Sesiones Restantes -->
+                    <div class="bg-white/80 dark:bg-gray-700/80 rounded-lg shadow-md p-6 border-l-4 border-orange-500 backdrop-blur-sm">
+                        <h3 class="text-lg font-medium text-gray-700 dark:text-gray-300">Restantes</h3>
+                        <p class="mt-2 text-3xl font-bold text-orange-600 dark:text-orange-400">{{ $program->remaining_sessions }}</p>
+                    </div>
+                    <!-- Sesiones Completadas -->
+                    <div class="bg-white/80 dark:bg-gray-700/80 rounded-lg shadow-md p-6 border-l-4 border-green-500 backdrop-blur-sm">
+                        <h3 class="text-lg font-medium text-gray-700 dark:text-gray-300">Completadas</h3>
+                        <p class="mt-2 text-3xl font-bold text-green-600 dark:text-green-400">{{ $program->completed_sessions }}</p>
+                    </div>
+                </div>
 
-        <!-- Tabla de sesiones -->
-        <div class="bg-white shadow-lg rounded-xl overflow-hidden">
-            <div class="px-6 py-4 border-b border-gray-200">
-                <h3 class="text-xl font-semibold text-gray-800">Listado de Sesiones</h3>
-            </div>
-            <div class="overflow-x-auto">
-                <table class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-gray-50">
-                        <tr>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"># Sesión</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha</th>
-                            <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"></th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg-white divide-y divide-gray-200">
-                        @foreach($sessions as $session)
-                        <tr class="hover:bg-gray-50 transition duration-150 @if($session->status == 'completed') bg-green-200 @endif">
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm font-medium text-gray-900">{{ $session->number_of_session }}</div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                @if($session->status == 'Completada')
-                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                        {{ $session->status }}
-                                    </span>
-                                @elseif($session->status == 'Pendiente')
-                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
-                                        {{ $session->status }}
-                                    </span>
-                                @else
-                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">
-                                        {{ $session->status }}
-                                    </span>
-                                @endif
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {{ $session->estimated_date }}
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-center">
-                                <a href="{{ route('session.show', $session->id) }}" class="text-blue-600 hover:text-blue-900">Ver</a>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
+                <!-- Tabla de sesiones -->
+                <div class="bg-white/80 dark:bg-gray-700/80 shadow-lg rounded-xl overflow-hidden backdrop-blur-sm">
+                    <div class="px-6 py-4 border-b border-gray-200/30">
+                        <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200">Listado de Sesiones</h3>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200/30">
+                            <thead class="bg-orange-500/20 dark:bg-orange-600/20">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider"># Sesión</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider">Estado</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider">Fecha</th>
+                                    <th class="px-6 py-3 text-center text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white/50 dark:bg-gray-800/50 divide-y divide-gray-200/20">
+                                @foreach($sessions as $session)
+                                <tr class="hover:bg-orange-50/30 dark:hover:bg-orange-900/20 transition-colors duration-200 @if($session->status == 'completed') bg-green-200/30 dark:bg-green-800/30 @endif">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">
+                                        {{ $session->number_of_session }}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        @if($session->status == 'Completada')
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100/80 dark:bg-green-800/80 text-green-800 dark:text-green-200">
+                                                {{ $session->status }}
+                                            </span>
+                                        @elseif($session->status == 'Pendiente')
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100/80 dark:bg-yellow-800/80 text-yellow-800 dark:text-yellow-200">
+                                                {{ $session->status }}
+                                            </span>
+                                        @else
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100/80 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                                                {{ $session->status }}
+                                            </span>
+                                        @endif
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
+                                        {{ $session->estimated_date }}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-center">
+                                        <a href="{{ route('session.show', $session->id) }}" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition-colors">Ver</a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
-        <form action="{{ route('program.destroy', $program->id) }}" method="POST" onsubmit="return confirm('¿Eliminar este programa? ¡Esta acción no se puede deshacer!')">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btn btn-danger">Eliminar Programa</button>
-        </form>
+                <!-- Botones de acción -->
+                <div class="mt-6 flex flex-col sm:flex-row justify-between space-y-4 sm:space-y-0 sm:space-x-4">
+                    <div class="space-x-4">
+                        <a href="{{ route('programs.index') }}" 
+                           class="inline-block bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
+                            ← Volver a mis programas
+                        </a>
+                        
+                        <a href="{{ route('dashboard') }}" 
+                           class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
+                            Ir al Dashboard
+                        </a>
+                    </div>
+                    
+                    <form action="{{ route('program.destroy', $program->id) }}" method="POST" onsubmit="return confirm('¿Eliminar este programa? ¡Esta acción no se puede deshacer!')">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" 
+                                class="inline-block bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
+                            Eliminar Programa
+                        </button>
+                    </form>
+                </div>
 
-        <!-- Botones de navegación -->
-        <div class="mt-6 flex justify-between">
-            <!-- Botón para volver al index -->
-            <a href="{{ route('programs.index') }}" 
-            class="inline-block bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
-                ← Volver a mis programas
-            </a>
-            
-            <!-- Botón para ir al dashboard -->
-            <a href="{{ route('dashboard') }}" 
-            class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
-                Ir al Dashboard
-            </a>
-        </div>
-        
-        @if($sessions->hasPages())
-        <div class="mt-6 bg-white shadow-lg rounded-xl overflow-hidden">
-            <div class="px-6 py-4 bg-gray-50 flex justify-center">
-                <nav class="flex items-center space-x-4">
-                    {{ $sessions->links() }}
-                </nav>
+                <!-- Paginación -->
+                @if($sessions->hasPages())
+                <div class="mt-6 bg-white/80 dark:bg-gray-700/80 shadow-lg rounded-xl overflow-hidden backdrop-blur-sm">
+                    <div class="px-6 py-4 bg-orange-50/30 dark:bg-orange-900/20 flex justify-center">
+                        <nav class="flex items-center space-x-4">
+                            {{ $sessions->links() }}
+                        </nav>
+                    </div>
+                </div>
+                @endif
             </div>
         </div>
-        @endif
     </div>
-</body>
-</html>
+</x-app-layout>
