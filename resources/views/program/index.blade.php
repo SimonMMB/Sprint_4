@@ -1,8 +1,8 @@
 <x-app-layout>
-    <!-- Contenedor con imagen de fondo -->
-    <div class="min-h-screen bg-cover bg-center py-12" style="background-image: url('{{ asset('storage/hot.avif') }}')">
-        <!-- Contenedor principal con el mismo estilo -->
-        <div class="w-full max-w-4xl mx-4 bg-white/70 dark:bg-gray-800/70 rounded-lg shadow-xl overflow-hidden transition-all duration-500 hover:shadow-2xl backdrop-blur-md">
+    <!-- Contenedor con imagen de fondo y centrado vertical/horizontal -->
+    <div class="min-h-screen bg-cover bg-center flex items-center justify-center p-4" style="background-image: url('{{ asset('storage/006.jpg') }}')">
+        <!-- Contenedor principal centrado -->
+        <div class="w-full max-w-4xl bg-white/70 dark:bg-gray-800/70 rounded-lg shadow-xl overflow-hidden transition-all duration-500 hover:shadow-2xl backdrop-blur-md">
             <!-- Header naranja translúcido -->
             <div class="bg-orange-500/80 dark:bg-orange-600/80 p-4 text-center">
                 <h2 class="text-2xl font-bold text-white">

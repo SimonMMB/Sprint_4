@@ -10,8 +10,9 @@ use App\Models\Exercise;
 
 Route::view('/test-chart', 'test-chart');
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('auth.login');
+})->name('login');
+
 
 Route::controller(UserController::class)->group(function () {
     Route::get('/users/create', 'create')->name('users.create');

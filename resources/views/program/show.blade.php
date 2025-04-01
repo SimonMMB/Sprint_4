@@ -1,6 +1,6 @@
 <x-app-layout>
     <!-- Contenedor con imagen de fondo -->
-    <div class="min-h-screen bg-cover bg-center py-12" style="background-image: url('{{ asset('storage/hot.avif') }}')">
+    <div class="min-h-screen bg-cover bg-center py-12" style="background-image: url('{{ asset('storage/007.jpg') }}')">
         <!-- Tarjeta central -->
         <div class="w-full max-w-4xl mx-4 bg-white/70 dark:bg-gray-800/70 rounded-lg shadow-xl overflow-hidden transition-all duration-500 hover:shadow-2xl backdrop-blur-md">
             <!-- Header naranja translúcido -->
@@ -86,32 +86,21 @@
                             ← Volver a mis programas
                         </a>
                         
-                        <a href="{{ route('dashboard') }}" 
-                           class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
-                            Ir al Dashboard
-                        </a>
                     </div>
                     
-                    <form action="{{ route('program.destroy', $program->id) }}" method="POST" onsubmit="return confirm('¿Eliminar este programa? ¡Esta acción no se puede deshacer!')">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" 
-                                class="inline-block bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
-                            Eliminar Programa
-                        </button>
-                    </form>
+                    
                 </div>
 
                 <!-- Paginación -->
-                @if($sessions->hasPages())
-                <div class="mt-6 bg-white/80 dark:bg-gray-700/80 shadow-lg rounded-xl overflow-hidden backdrop-blur-sm">
-                    <div class="px-6 py-4 bg-orange-50/30 dark:bg-orange-900/20 flex justify-center">
-                        <nav class="flex items-center space-x-4">
-                            {{ $sessions->links() }}
-                        </nav>
-                    </div>
-                </div>
-                @endif
+@if($sessions->hasPages())
+<div class="mt-6 bg-white/80 dark:bg-gray-700/80 shadow-lg rounded-xl overflow-hidden backdrop-blur-sm">
+    <div class="px-6 py-4 bg-orange-50/30 dark:bg-orange-900/20">
+        {{ $sessions->links() }}
+    </div>
+</div>
+@endif
+
+               
             </div>
         </div>
     </div>

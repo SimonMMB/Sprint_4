@@ -1,6 +1,6 @@
 <x-app-layout>
     <!-- Contenedor con imagen de fondo -->
-    <div class="min-h-screen bg-cover bg-center flex items-center justify-center p-4" style="background-image: url('{{ asset('storage/hot.avif') }}')">
+    <div class="min-h-screen bg-cover bg-center flex items-center justify-center p-4" style="background-image: url('{{ asset('storage/012.jpg') }}')">
         <!-- Tarjeta central - ahora con ancho fijo y centrado -->
         <div class="w-full max-w-4xl bg-white/70 dark:bg-gray-800/70 rounded-lg shadow-xl transition-all duration-500 hover:shadow-2xl backdrop-blur-md overflow-y-auto max-h-[90vh]">
             <!-- Header naranja translúcido -->

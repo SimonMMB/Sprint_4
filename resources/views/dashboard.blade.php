@@ -1,6 +1,6 @@
 <x-app-layout>
     <!-- Contenedor con imagen de fondo y alineación CENTRADA -->
-    <div class="min-h-screen bg-cover bg-center flex items-center justify-center" style="background-image: url('{{ asset('storage/') }}')">
+    <div class="min-h-screen bg-cover bg-center flex items-center justify-center" style="background-image: url('{{ asset('storage/003.jpg') }}')">
         <!-- Tarjeta CENTRADA (mismo estilo pero con bordes redondeados completos) -->
         <div class="w-full max-w-md bg-white/70 dark:bg-gray-800/70 rounded-2xl shadow-xl overflow-hidden transition-all duration-500 hover:shadow-2xl backdrop-blur-md mx-4">
             <!-- Header naranja translúcido -->

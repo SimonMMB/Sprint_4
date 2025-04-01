@@ -1,81 +1,123 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro | Simon</title>
-    @vite(['resources/css/app.css'])
-</head>
-<body class="bg-gray-100 min-h-screen">
-    <div class="max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-        <div class="bg-white shadow-xl rounded-lg overflow-hidden">
-            <!-- Header -->
-            <div class="bg-gradient-to-r from-blue-600 to-indigo-700 p-6">
-                <h1 class="text-3xl font-bold text-white">Registro de Usuario</h1>
-                <p class="text-blue-100 mt-1">Completa todos los campos para registrarte</p>
+<x-app-layout>
+    <!-- Contenedor con imagen de fondo -->
+    <div class="min-h-screen bg-cover bg-center" style="background-image: url('{{ asset('storage/002.jpg') }}')">
+        <!-- Tarjeta alineada a la izquierda CON BORDES RECTOS -->
+        <div class="w-full max-w-md bg-white/70 dark:bg-gray-800/70 shadow-xl backdrop-blur-md min-h-screen flex flex-col">
+            
+            <!-- Header naranja translúcido -->
+            <div class="bg-orange-500/80 dark:bg-orange-600/80 p-6 text-center">
+                <h2 class="text-2xl font-bold text-white">
+                    ¡Únete a nosotros!
+                </h2>
+                <p class="mt-1 text-orange-100 dark:text-orange-200">
+                    Crea tu cuenta en minutos
+                </p>
             </div>
+            
+            <div class="p-6 space-y-6 overflow-y-auto flex-1"> 
+                <!-- Mensaje de errores -->
+                @if ($errors->any())
+                    <div class="flex items-center bg-red-50/80 dark:bg-red-900/40 rounded-lg p-3 border-l-4 border-red-500">
+                        <svg class="h-5 w-5 text-red-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <div>
+                            @foreach ($errors->all() as $error)
+                                <p class="text-red-700 dark:text-red-300 text-sm">{{ $error }}</p>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
 
-            @if ($errors->any())
-                <!-- Mismo bloque de errores que ya tienes -->
-            @endif
+                <!-- Formulario de registro -->
+                <form action="{{ route('users.store') }}" method="POST" class="space-y-4">
+                    @csrf
 
-            <form action="{{ route('users.store') }}" method="POST" class="p-6 space-y-6">
-                @csrf
-
-                <!-- Sección de Información Personal -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <!-- Nombre -->
                     <div>
-                        <label for="name" class="block text-sm font-medium text-gray-700">Nombre</label>
-                        <input type="text" name="name" id="name" value="{{ old('name') }}" required
-                               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
+                        <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                            Nombre
+                        </label>
+                        <input id="name"
+                               type="text"
+                               name="name"
+                               value="{{ old('name') }}"
+                               required
+                               class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white/90 dark:bg-gray-700/90 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-300"
+                               placeholder="Tu nombre">
                     </div>
 
                     <!-- Apellido -->
                     <div>
-                        <label for="surname" class="block text-sm font-medium text-gray-700">Apellido</label>
-                        <input type="text" name="surname" id="surname" value="{{ old('surname') }}" required
-                               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border">
+                        <label for="surname" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                            Apellido
+                        </label>
+                        <input id="surname"
+                               type="text"
+                               name="surname"
+                               value="{{ old('surname') }}"
+                               required
+                               class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white/90 dark:bg-gray-700/90 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-300"
+                               placeholder="Tu apellido">
                     </div>
-                </div>
 
-                <!-- Email -->
-                <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
-                    <input type="email" name="email" id="email" value="{{ old('email') }}" required
-                           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border"
-                           placeholder="ejemplo@correo.com">
-                </div>
-
-                <!-- Contraseña -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Email -->
                     <div>
-                        <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
-                        <input type="password" name="password" id="password" required
-                               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border"
+                        <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                            Correo electrónico
+                        </label>
+                        <input id="email"
+                               type="email"
+                               name="email"
+                               value="{{ old('email') }}"
+                               required
+                               class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white/90 dark:bg-gray-700/90 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-300"
+                               placeholder="tu@email.com">
+                    </div>
+
+                    <!-- Contraseña -->
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                            Contraseña
+                        </label>
+                        <input id="password"
+                               type="password"
+                               name="password"
+                               required
+                               class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white/90 dark:bg-gray-700/90 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-300"
                                placeholder="••••••••">
                     </div>
 
+                    <!-- Confirmar Contraseña -->
                     <div>
-                        <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Confirmar Contraseña</label>
-                        <input type="password" name="password_confirmation" id="password_confirmation" required
-                               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border"
+                        <label for="password_confirmation" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                            Confirmar contraseña
+                        </label>
+                        <input id="password_confirmation"
+                               type="password"
+                               name="password_confirmation"
+                               required
+                               class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white/90 dark:bg-gray-700/90 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-300"
                                placeholder="••••••••">
                     </div>
-                </div>
 
-                <!-- Botón de Registro -->
-                <div class="flex justify-end pt-4">
+                    <!-- Botón de Registro -->
                     <button type="submit"
-                            class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
-                        <svg class="-ml-1 mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                        </svg>
+                            class="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-4 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-[1.02]">
                         Completar Registro
                     </button>
-                </div>
-            </form>
+
+                    <!-- Enlace a Login -->
+                    <div class="text-center pt-4 border-t border-gray-200 dark:border-gray-700">
+                        <p class="text-sm text-gray-600 dark:text-gray-400">
+                            ¿Ya tienes cuenta?
+                            <a href="{{ route('login') }}" class="text-orange-500 hover:underline font-medium">
+                                Inicia sesión
+                            </a>
+                        </p>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</body>
-</html>
+</x-app-layout>
