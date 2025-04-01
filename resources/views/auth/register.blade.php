@@ -1,6 +1,6 @@
 <div class="max-w-lg mx-auto mt-8">
     <div class="bg-white p-6 rounded-lg shadow-lg">
-        <h2 class="text-2xl font-bold mb-6 text-center">Crear cuenta PUTA</h2>
+        <h2 class="text-2xl font-bold mb-6 text-center">Crear cuenta</h2>
 
         <form method="POST" action="{{ route('users.store') }}">
             @csrf

@@ -1,10 +1,7 @@
 <x-app-layout>
-    <!-- Contenedor con imagen de fondo -->
-    <div class="min-h-screen bg-cover bg-center" style="background-image: url('{{ asset('storage/002.jpg') }}')">
-        <!-- Tarjeta alineada a la izquierda CON BORDES RECTOS -->
-        <div class="w-full max-w-md bg-white/70 dark:bg-gray-800/70 shadow-xl backdrop-blur-md min-h-screen flex flex-col">
-            
-            <!-- Header naranja translúcido -->
+    <div class="flex h-screen w-full">
+        
+        <div class="w-full md:w-1/3 bg-white/70 dark:bg-gray-800/80 shadow-xl backdrop-blur-md flex flex-col">
             <div class="bg-orange-500/80 dark:bg-orange-600/80 p-6 text-center">
                 <h2 class="text-2xl font-bold text-white">
                     ¡Únete a nosotros!
@@ -14,8 +11,7 @@
                 </p>
             </div>
             
-            <div class="p-6 space-y-6 overflow-y-auto flex-1"> 
-                <!-- Mensaje de errores -->
+            <div class="p-6 space-y-6 overflow-y-auto flex-1">
                 @if ($errors->any())
                     <div class="flex items-center bg-red-50/80 dark:bg-red-900/40 rounded-lg p-3 border-l-4 border-red-500">
                         <svg class="h-5 w-5 text-red-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -29,85 +25,77 @@
                     </div>
                 @endif
 
-                <!-- Formulario de registro -->
                 <form action="{{ route('users.store') }}" method="POST" class="space-y-4">
                     @csrf
 
-                    <!-- Nombre -->
                     <div>
                         <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                             Nombre
                         </label>
                         <input id="name"
-                               type="text"
-                               name="name"
-                               value="{{ old('name') }}"
-                               required
-                               class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white/90 dark:bg-gray-700/90 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-300"
-                               placeholder="Tu nombre">
+                            type="text"
+                            name="name"
+                            value="{{ old('name') }}"
+                            required
+                            class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white/90 dark:bg-gray-700/90 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-300"
+                            placeholder="Tu nombre">
                     </div>
 
-                    <!-- Apellido -->
                     <div>
                         <label for="surname" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                             Apellido
                         </label>
                         <input id="surname"
-                               type="text"
-                               name="surname"
-                               value="{{ old('surname') }}"
-                               required
-                               class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white/90 dark:bg-gray-700/90 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-300"
-                               placeholder="Tu apellido">
+                            type="text"
+                            name="surname"
+                            value="{{ old('surname') }}"
+                            required
+                            class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white/90 dark:bg-gray-700/90 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-300"
+                            placeholder="Tu apellido">
                     </div>
 
-                    <!-- Email -->
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                             Correo electrónico
                         </label>
                         <input id="email"
-                               type="email"
-                               name="email"
-                               value="{{ old('email') }}"
-                               required
-                               class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white/90 dark:bg-gray-700/90 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-300"
-                               placeholder="tu@email.com">
+                            type="email"
+                            name="email"
+                            value="{{ old('email') }}"
+                            required
+                            class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white/90 dark:bg-gray-700/90 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-300"
+                            placeholder="tu@email.com">
                     </div>
 
-                    <!-- Contraseña -->
                     <div>
                         <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                             Contraseña
                         </label>
                         <input id="password"
-                               type="password"
-                               name="password"
-                               required
-                               class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white/90 dark:bg-gray-700/90 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-300"
-                               placeholder="••••••••">
+                            type="password"
+                            name="password"
+                            required
+                            class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white/90 dark:bg-gray-700/90 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-300"
+                            placeholder="••••••••">
                     </div>
 
-                    <!-- Confirmar Contraseña -->
                     <div>
                         <label for="password_confirmation" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                             Confirmar contraseña
                         </label>
                         <input id="password_confirmation"
-                               type="password"
-                               name="password_confirmation"
-                               required
-                               class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white/90 dark:bg-gray-700/90 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-300"
-                               placeholder="••••••••">
+                            type="password"
+                            name="password_confirmation"
+                            required
+                            class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white/90 dark:bg-gray-700/90 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-300"
+                            placeholder="••••••••">
                     </div>
 
-                    <!-- Botón de Registro -->
                     <button type="submit"
-                            class="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-4 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-[1.02]">
+                        class="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-4 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-[1.02]">
                         Completar Registro
                     </button>
 
-                    <!-- Enlace a Login -->
                     <div class="text-center pt-4 border-t border-gray-200 dark:border-gray-700">
                         <p class="text-sm text-gray-600 dark:text-gray-400">
                             ¿Ya tienes cuenta?
@@ -118,6 +106,14 @@
                     </div>
                 </form>
             </div>
+        </div>
+
+        <div class="hidden md:block md:w-2/3 h-full">
+            <img 
+                src="{{ asset('storage/002.jpg') }}" 
+                class="w-full h-full object-cover"
+                alt="Fondo de registro"
+            >
         </div>
     </div>
 </x-app-layout>

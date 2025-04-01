@@ -1,35 +1,27 @@
 <x-app-layout>
-    <!-- Contenedor con imagen de fondo -->
-    <div class="min-h-screen bg-cover bg-center py-12" style="background-image: url('{{ asset('storage/007.jpg') }}')">
-        <!-- Tarjeta central -->
-        <div class="w-full max-w-4xl mx-4 bg-white/70 dark:bg-gray-800/70 rounded-lg shadow-xl overflow-hidden transition-all duration-500 hover:shadow-2xl backdrop-blur-md">
-            <!-- Header naranja translúcido -->
+    <div class="flex h-screen w-full">
+
+        <div class="w-full md:w-3/5 bg-white/70 dark:bg-gray-800/80 shadow-xl backdrop-blur-md overflow-y-auto">
             <div class="bg-orange-500/80 dark:bg-orange-600/80 p-4 text-center">
                 <h1 class="text-2xl font-bold text-white">Programa de Entrenamiento</h1>
             </div>
 
-            <!-- Contenido -->
             <div class="p-6">
-                <!-- Estadísticas en cards -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                    <!-- Sesiones Totales -->
                     <div class="bg-white/80 dark:bg-gray-700/80 rounded-lg shadow-md p-6 border-l-4 border-blue-500 backdrop-blur-sm">
                         <h3 class="text-lg font-medium text-gray-700 dark:text-gray-300">Sesiones totales</h3>
                         <p class="mt-2 text-3xl font-bold text-gray-900 dark:text-white">{{ $program->total_sessions }}</p>
                     </div>
-                    <!-- Sesiones Restantes -->
                     <div class="bg-white/80 dark:bg-gray-700/80 rounded-lg shadow-md p-6 border-l-4 border-orange-500 backdrop-blur-sm">
                         <h3 class="text-lg font-medium text-gray-700 dark:text-gray-300">Restantes</h3>
                         <p class="mt-2 text-3xl font-bold text-orange-600 dark:text-orange-400">{{ $program->remaining_sessions }}</p>
                     </div>
-                    <!-- Sesiones Completadas -->
                     <div class="bg-white/80 dark:bg-gray-700/80 rounded-lg shadow-md p-6 border-l-4 border-green-500 backdrop-blur-sm">
                         <h3 class="text-lg font-medium text-gray-700 dark:text-gray-300">Completadas</h3>
                         <p class="mt-2 text-3xl font-bold text-green-600 dark:text-green-400">{{ $program->completed_sessions }}</p>
                     </div>
                 </div>
 
-                <!-- Tabla de sesiones -->
                 <div class="bg-white/80 dark:bg-gray-700/80 shadow-lg rounded-xl overflow-hidden backdrop-blur-sm">
                     <div class="px-6 py-4 border-b border-gray-200/30">
                         <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200">Listado de Sesiones</h3>
@@ -78,30 +70,32 @@
                     </div>
                 </div>
 
-                <!-- Botones de acción -->
                 <div class="mt-6 flex flex-col sm:flex-row justify-between space-y-4 sm:space-y-0 sm:space-x-4">
                     <div class="space-x-4">
                         <a href="{{ route('programs.index') }}" 
                            class="inline-block bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
                             ← Volver a mis programas
                         </a>
-                        
                     </div>
-                    
-                    
                 </div>
 
-                <!-- Paginación -->
-@if($sessions->hasPages())
-<div class="mt-6 bg-white/80 dark:bg-gray-700/80 shadow-lg rounded-xl overflow-hidden backdrop-blur-sm">
-    <div class="px-6 py-4 bg-orange-50/30 dark:bg-orange-900/20">
-        {{ $sessions->links() }}
-    </div>
-</div>
-@endif
-
-               
+                @if($sessions->hasPages())
+                <div class="mt-6 bg-white/80 dark:bg-gray-700/80 shadow-lg rounded-xl overflow-hidden backdrop-blur-sm">
+                    <div class="px-6 py-4 bg-orange-50/30 dark:bg-orange-900/20">
+                        {{ $sessions->links() }}
+                    </div>
+                </div>
+                @endif
             </div>
         </div>
+        
+        <div class="hidden md:block md:w-2/5 h-full">
+            <img 
+                src="{{ asset('storage/006.jpg') }}" 
+                class="w-full h-full object-cover object-center"
+                alt="Fondo de entrenamiento"
+            >
+        </div>
+
     </div>
 </x-app-layout>

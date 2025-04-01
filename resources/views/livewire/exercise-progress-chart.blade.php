@@ -1,15 +1,4 @@
 <div wire:ignore class="space-y-3">
-    <!-- Selector compacto -->
-    <div class="flex justify-center">
-        <select wire:model.live="timeRange" 
-                class="text-xs border-0 bg-white/80 dark:bg-gray-700/80 rounded-full shadow px-3 py-1 focus:ring-1 focus:ring-orange-500 transition-all">
-            <option value="week">Última semana</option>
-            <option value="month">Último mes</option>
-            <option value="all">Todo el historial</option>
-        </select>
-    </div>
-    
-    <!-- Gráfico compacto -->
     <div class="relative" style="height: 220px;">
         <canvas id="myChart"></canvas>
     </div>
@@ -24,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         type: 'bar',
         data: {
             labels: @json($chartData['labels']).map((label, index) => 
-                `Sesión ${index + 1}\n${label}`), // Añade número de sesión
+                `Sesión ${index + 1}\n${label}`), 
             datasets: [{
                 data: @json($chartData['weights']),
                 backgroundColor: '#f97316aa',
@@ -58,10 +47,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     },
                     ticks: { 
                         font: { size: 10 },
-                        color: 'white' // Texto eje Y blanco
+                        color: 'white' 
                     },
                     border: {
-                        color: 'white' // Línea eje Y blanca
+                        color: 'white' 
                     }
                 },
                 x: {
@@ -71,17 +60,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     },
                     ticks: { 
                         font: { size: 9 },
-                        color: 'white', // Texto eje X blanco
+                        color: 'white', 
                         maxRotation: 30,
                         minRotation: 30,
                         callback: function(value) {
-                            // Muestra "Sesión X - Fecha" en el eje
                             const parts = this.getLabelForValue(value).split('\n');
-                            return `${parts[0]} - ${parts[1]}`;
+                            return [`${parts[0]}`, `${parts[1]}`];
                         }
                     },
                     border: {
-                        color: 'white' // Línea eje X blanca
+                        color: 'white' 
                     }
                 }
             },
@@ -96,11 +84,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Livewire (sin cambios)
 document.addEventListener('livewire:init', () => {
     Livewire.on('updateChart', (chartData) => {
         if (chart) {
-            // Actualiza labels incluyendo número de sesión
             chart.data.labels = chartData.labels.map((label, index) => 
                 `Sesión ${index + 1}\n${label}`);
             chart.data.datasets[0].data = chartData.weights;

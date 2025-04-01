@@ -1,16 +1,12 @@
 <x-app-layout>
-    <!-- Contenedor con imagen de fondo y centrado vertical/horizontal -->
-    <div class="min-h-screen bg-cover bg-center flex items-center justify-center p-4" style="background-image: url('{{ asset('storage/006.jpg') }}')">
-        <!-- Contenedor principal centrado -->
-        <div class="w-full max-w-4xl bg-white/70 dark:bg-gray-800/70 rounded-lg shadow-xl overflow-hidden transition-all duration-500 hover:shadow-2xl backdrop-blur-md">
-            <!-- Header naranja translúcido -->
+    <div class="min-h-screen bg-cover bg-center bg-no-repeat bg-fixed flex items-center justify-center p-4" style="background-image: url('{{ asset('storage/005.jpg') }}')">
+        <div class="w-full max-w-4xl bg-white/70 dark:bg-gray-800/80 rounded-lg shadow-xl overflow-hidden transition-all duration-500 hover:shadow-2xl backdrop-blur-md">
             <div class="bg-orange-500/80 dark:bg-orange-600/80 p-4 text-center">
                 <h2 class="text-2xl font-bold text-white">
                     {{ __('Mis Programas de Entrenamiento') }}
                 </h2>
             </div>
 
-            <!-- Contenido de la tabla -->
             <div class="p-6">
                 @if(session('success'))
                     <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6" role="alert">
@@ -18,7 +14,6 @@
                     </div>
                 @endif
 
-                <!-- Tabla de programas con estilo mejorado -->
                 <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-200/50">
                         <thead class="bg-orange-500/20 dark:bg-orange-600/20">
@@ -63,7 +58,6 @@
                     </table>
                 </div>
 
-                <!-- Botón para crear nuevo programa -->
                 <div class="mt-6">
                     <a href="{{ route('programs.create') }}" 
                        class="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105">
@@ -76,7 +70,6 @@
                     </a>
                 </div>
 
-                <!-- Paginación con estilo -->
                 @if ($programs->hasPages())
                 <div class="px-6 py-4 bg-orange-50/30 dark:bg-orange-900/20 mt-6 rounded-b-lg">
                     {{ $programs->links() }}
