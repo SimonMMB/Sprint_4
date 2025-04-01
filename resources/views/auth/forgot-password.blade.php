@@ -62,7 +62,7 @@
 
                 <!-- Enlace de regreso al login -->
                 <div class="text-center pt-4 border-t border-gray-200 dark:border-gray-700 mt-4">
-                    <a href="{{ route('welcome') }}" 
+                    <a href="{{ route('login') }}" 
                        class="text-orange-500 hover:underline font-medium text-sm inline-flex items-center">
                         <svg class="h-4 w-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
