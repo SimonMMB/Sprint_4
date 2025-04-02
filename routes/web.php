@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProgramController;
@@ -19,6 +18,10 @@ Route::controller(UserController::class)->group(function () {
     Route::post('/users', 'store')->name('users.store');
 });
 
+Route::get('/account-deleted', function () {
+    return view('auth.account-deleted');
+})->name('account.deleted');
+
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
     Route::get('/program', [ProgramController::class, 'create'])->name('program.create');
@@ -32,6 +35,12 @@ Route::middleware('auth')->group(function () {
         return view('exercise.progress', ['exercise' => $exercise]);
     })->name('exercises.progress');
     
+    Route::get('/delete-account-form', function () {
+        return view('profile.partials.delete-user-form');
+    })->name('delete.account.form');
+
+    Route::delete('/profile', [UserController::class, 'destroy'])->name('profile.destroy');
+   
     
 
     Route::resource('programs', ProgramController::class)->except(['show']);
@@ -39,10 +48,6 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+
 
 require __DIR__.'/auth.php';

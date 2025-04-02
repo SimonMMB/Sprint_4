@@ -1,14 +1,16 @@
 <x-app-layout>
-    <div class="flex h-screen w-full">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wdth,wght@0,75..100,100..900;1,75..100,100..900&display=swap" rel="stylesheet">
 
+    <div class="flex h-screen w-full">
+        
         <div class="w-full md:w-1/3 bg-white/70 dark:bg-gray-800/80 shadow-xl backdrop-blur-md flex flex-col">
-            <div class="bg-orange-500/80 dark:bg-orange-600/80 p-6 text-center">
-                <h2 class="text-2xl font-bold text-white">
-                    ¡Bienvenid@!
+            
+            <div class="bg-orange-500/80 dark:bg-orange-600/80 p-4 text-center">
+                <h2 class="text-5xl text-white" style="font-family: 'Roboto', sans-serif; font-style: italic; font-weight: 900; font-stretch: 100%; letter-spacing: -0.05em; line-height: 0.8;">
+                    STAY<br>STRONG
                 </h2>
-                <p class="mt-1 text-orange-100 dark:text-orange-200">
-                    Tu plataforma de entrenamiento personal
-                </p>
             </div>
 
             <div class="p-6 space-y-6 overflow-y-auto flex-1">

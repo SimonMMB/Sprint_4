@@ -60,6 +60,14 @@
                         </button>
                     </form>
                 </div>
+
+                <div class="mt-8 text-center">
+                    <a href="{{ route('delete.account.form') }}" 
+                    class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
+                    Eliminar cuenta
+                    </a>
+                </div>
+
             </div>
         </div>
     </div>

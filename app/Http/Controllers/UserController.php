@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Program;
 use App\Services\UserSessionService;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -83,8 +84,21 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy()
+    public function destroy(Request $request)
     {
+        $request->validate([
+            'password' => ['required', 'current_password'],
+        ]);
 
+        $user = $request->user();
+        
+        Auth::logout();
+        $user->delete();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        // Redirige a una ruta específica de confirmación
+        return redirect()->route('account.deleted');
     }
 }
