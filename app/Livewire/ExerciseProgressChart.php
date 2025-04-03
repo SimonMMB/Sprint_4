@@ -36,10 +36,10 @@ class ExerciseProgressChart extends Component
             'labels' => $records->pluck('trainingSession.estimated_date')
                 ->map(fn($date) => \Carbon\Carbon::parse($date)->format('d/m/Y'))
                 ->toArray(),
-            'weights' => $records->pluck('lifted_weight')->toArray()
+            'weights' => $records->pluck('lifted_weight')->toArray(),
+            'yAxisTitle' => 'Kg'
         ];
 
-        // Disparar evento Livewire para actualizar el gráfico
         $this->dispatch('updateChart', chartData: $this->chartData);
     }
 

@@ -41,6 +41,12 @@ document.addEventListener('DOMContentLoaded', () => {
             scales: {
                 y: {
                     beginAtZero: true,
+                    title: { 
+                        display: true,
+                        text: 'Kg',
+                        color: 'white',
+                        font: {size: 12},
+                    },
                     grid: { 
                         display: false,
                         color: 'rgba(255, 255, 255, 0.1)' 

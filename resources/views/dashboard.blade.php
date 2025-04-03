@@ -1,12 +1,24 @@
 <x-app-layout>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wdth,wght@0,75..100,100..900;1,75..100,100..900&display=swap" rel="stylesheet">
+
     <div class="min-h-screen bg-cover bg-center bg-no-repeat bg-fixed flex items-center justify-center" style="background-image: url('{{ asset('storage/003.jpg') }}')">
+        <a href="{{ route('dashboard') }}" class="absolute top-4 left-4 z-50">
+            <div class="bg-orange-500/90 dark:bg-orange-600/90 rounded-lg p-3 shadow-md hover:bg-orange-600 dark:hover:bg-orange-700 transition-colors duration-300">
+                <h2 class="text-xl text-white text-center" style="font-family: 'Roboto', sans-serif; font-style: italic; font-weight: 900; font-stretch: 100%; letter-spacing: -0.05em; line-height: 0.9; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
+                    STAY<br>STRONG
+                </h2>
+            </div>
+        </a>
+
         <div class="w-full max-w-md bg-white/70 dark:bg-gray-800/80 rounded-2xl shadow-xl overflow-hidden transition-all duration-500 hover:shadow-2xl backdrop-blur-md mx-4">
-            <div class="bg-orange-500/80 dark:bg-orange-600/80 p-6 text-center">
+            <div class="bg-orange-500/80 dark:bg-orange-600/80 p-4 text-center">
                 <h2 class="text-2xl font-bold text-white">
-                    ¡Bienvenid@, {{ $name }}!
+                    ¡Hola {{ $name }}!
                 </h2>
                 <p class="mt-1 text-orange-100 dark:text-orange-200">
-                    {{ __("Tu portal de entrenamiento personalizado") }}
+                    {{ __("Tu portal de entrenamiento") }}
                 </p>
             </div>
 
@@ -61,13 +73,12 @@
                     </form>
                 </div>
 
-                <div class="mt-8 text-center">
+                <div class="mt-4 text-center">
                     <a href="{{ route('delete.account.form') }}" 
-                    class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
-                    Eliminar cuenta
+                       class="text-xs text-red-500 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 underline">
+                        Eliminar cuenta
                     </a>
                 </div>
-
             </div>
         </div>
     </div>
