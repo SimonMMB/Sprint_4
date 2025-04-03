@@ -4,21 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Program;
-use App\Models\UserSession;
-use App\Services\UserSessionService;
+use App\Models\TrainingSession;
+use App\Services\TrainingSessionService;
 
 class ProgramController extends Controller
 {
-    protected UserSessionService $userSessionService;
+    protected TrainingSessionService $trainingSessionService;
 
-    public function __construct(UserSessionService $userSessionService)
+    public function __construct(TrainingSessionService $trainingSessionService)
     {
-        $this->userSessionService = $userSessionService;
+        $this->trainingSessionService = $trainingSessionService;
     }
     
     public function create()
     {
-        return view('program.create');
+        return view('programs.create');
     }
 
     public function store(Request $request)
@@ -32,25 +32,31 @@ class ProgramController extends Controller
 
         $user = auth()->user();
 
-        $this->userSessionService->createUserProgram($user, $validated['training_frequency'], $validated['training_duration'], $validated['start_date'], $validated['estimated_end_date']);
+        $this->trainingSessionService->createProgram(
+            $user, 
+            $validated['training_frequency'], 
+            $validated['training_duration'], 
+            $validated['start_date'], 
+            $validated['estimated_end_date']);
 
-        return redirect()->route('programs.index')->with('success', 'Programa creado exitosamente!');
+        return redirect()->route('programs.index');
     }
 
     public function index()
     {
         $user = auth()->user();
         $programs = Program::where('user_id', $user->id)->paginate(10);
-        return view('program.index', compact('programs'));
+
+        return view('programs.index', compact('programs'));
     }
 
 
     public function show(Program $program)
     {
-        $this->userSessionService->updateCompletedSessions($program);
-        $sessions = UserSession::where('program_id', $program->id)->paginate(10);;
+        $this->trainingSessionService->updateCompletedSessions($program);
+        $trainingSessions = TrainingSession::where('program_id', $program->id)->paginate(10);
 
-        return view('program.show', compact('program', 'sessions'));
+        return view('programs.show', compact('program', 'trainingSessions'));
     }
 
     public function destroy(string $id)
@@ -59,7 +65,10 @@ class ProgramController extends Controller
         $program = Program::where('id', $id)->where('user_id', $user->id)->firstOrFail();
         $program->delete();
         $user->update(['training_frequency' => null, 'training_duration' => null]);
-        return redirect()->route('programs.index')->with('success', 'Programa eliminado correctamente');
+
+        return redirect()->route('programs.index');
     }
 
 }
+
+?>

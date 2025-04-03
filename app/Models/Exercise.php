@@ -22,3 +22,5 @@ class Exercise extends Model
         return $this->hasMany(SessionExercise::class);
     }
 }
+
+?>

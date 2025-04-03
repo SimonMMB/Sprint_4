@@ -4,15 +4,20 @@ namespace App\Services;
 
 use Illuminate\Http\Request;
 use App\Models\Program;
-use App\Models\UserSession;
+use App\Models\TrainingSession;
 use App\Models\SessionExercise;
 use App\Models\Exercise;
 use App\Models\User;
 use DateTime;
 
-class UserSessionService
+class TrainingSessionService
 {
-    public function createUserProgram(User $user, int $training_frequency, int $training_duration, string $start_date, string $estimated_end_date)
+    public function createProgram(
+        User $user, 
+        int $training_frequency, 
+        int $training_duration, 
+        string $start_date, 
+        string $estimated_end_date)
     {
         $totalWeeks = $training_duration * 4;
         $sessionsPerWeek = $training_frequency;
@@ -29,10 +34,10 @@ class UserSessionService
             'remaining_sessions' => $totalSessions
         ]);
        
-        $this->createUserSessions($user, $program);
+        $this->createTrainingSessions($user, $program);
     }
 
-    public function createUserSessions(User $user, Program $program)
+    private function createTrainingSessions(User $user, Program $program)
     {
         $totalWeeks = $program->training_duration * 4;
         $sessionsPerWeek = $program->training_frequency;
@@ -47,7 +52,7 @@ class UserSessionService
                     $startDate->modify('+1 day');
                 }
 
-                $userSession = UserSession::create([
+                $userSession = TrainingSession::create([
                     'number_of_session' => $sessionCounter,
                     'program_id' => $program->id,
                     'user_id' => $user->id,
@@ -63,7 +68,7 @@ class UserSessionService
         }
     }
 
-    private function assignExercisesToSession(UserSession $userSession)
+    private function assignExercisesToSession(TrainingSession $trainingSession)
     {
         $muscleGroups = Exercise::select('muscle_group')->distinct()->pluck('muscle_group'); 
         $exercises = collect();
@@ -78,18 +83,15 @@ class UserSessionService
 
         foreach ($exercises as $exercise) {
             SessionExercise::create([
-                'user_session_id' => $userSession->id,
+                'training_session_id' => $trainingSession->id,
                 'exercise_id' => $exercise->id,
                 'status' => 'pending'
             ]);
         }
     }
 
-    public function completeExercisesAndSession(Request $request, int $userSessionId, int $sessionExerciseId)
+    public function completeExercisesAndSession(Request $request, TrainingSession $trainingSession, SessionExercise $sessionExercise)
     {
-        $userSession = UserSession::findOrFail($userSessionId);
-        $sessionExercise = SessionExercise::findOrFail($sessionExerciseId);
-
         if ($sessionExercise->status != 'completed') {
             $request->validate([
                 'lifted_weight' => 'required|integer|min:1'
@@ -102,27 +104,29 @@ class UserSessionService
         
         $allExercisesCompleted = true;
 
-        foreach ($userSession->sessionExercises as $sessionExercise) {
+        foreach ($trainingSession->sessionExercises as $sessionExercise) {
             if ($sessionExercise->status === 'pending') {
                 $allExercisesCompleted = false;
             }
         }
 
         if ($allExercisesCompleted) {
-            $userSession->update(['status' => 'completed']);
+            $trainingSession->update(['status' => 'completed']);
         }
 
-        $userSession->save();
+        $trainingSession->save();
     }
 
     public function updateCompletedSessions(Program $program)
     {
-        $sessions = UserSession::where('program_id', $program->id)->get();
-        $completedSessions = $sessions->filter(function($session) {
-            return $session->status == 'completed';
+        $trainingSessions = TrainingSession::where('program_id', $program->id)->get();
+        $completedSessions = $trainingSessions->filter(function($trainingSession) {
+            return $trainingSession->status == 'completed';
         })->count();
         $program->completed_sessions = $completedSessions;
         $program->remaining_sessions = $program->total_sessions - $completedSessions;
         $program->save();
     }
 }
+
+?>

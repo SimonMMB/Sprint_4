@@ -4,17 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Program;
-use App\Services\UserSessionService;
+use App\Services\TrainingSessionService;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    protected UserSessionService $userSessionService;
+    protected TrainingSessionService $trainingSessionService;
 
-    public function __construct(UserSessionService $userSessionService)
+    public function __construct(TrainingSessionService $trainingSessionService)
     {
-        $this->userSessionService = $userSessionService;
+        $this->trainingSessionService = $trainingSessionService;
     }
 
     /**
@@ -54,7 +53,24 @@ class UserController extends Controller
 
         auth()->login($user);
 
-        return redirect()->route('dashboard'); // O la ruta que prefieras
+        return redirect()->route('dashboard');
+    }
+
+    public function dashboard()
+    {
+        $user = auth()->user();  
+
+        if (!$user) {
+            return redirect()->route('login'); 
+        }
+
+        $name = $user->name;  
+        $program = $user->program; 
+
+        return view('dashboard', [
+            'name' => $name,
+            'program_id' => $program ? $program->id : null
+        ]);
     }
 
     /**

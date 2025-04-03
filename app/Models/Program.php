@@ -25,9 +25,11 @@ class Program extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function userSession()
+    public function trainingSessions()
     {
-        return $this->hasMany(UserSession::class);
+        return $this->hasMany(TrainingSession::class);
     }
 
 }
+
+?>

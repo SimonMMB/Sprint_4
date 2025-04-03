@@ -37,12 +37,12 @@
                                     {{ $program->completed_sessions }} / {{ $program->total_sessions }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-                                    <a href="{{ route('program.show', $program->id) }}" 
+                                    <a href="{{ route('programs.show', $program->id) }}" 
                                        class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition-colors">
                                         Ver
                                     </a>
                                     <span class="text-gray-400">|</span>
-                                    <form action="{{ route('program.destroy', $program->id) }}" method="POST" class="inline">
+                                    <form action="{{ route('programs.destroy', $program->id) }}" method="POST" class="inline">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" 

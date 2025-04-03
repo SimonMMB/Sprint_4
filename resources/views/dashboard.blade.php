@@ -21,7 +21,7 @@
                 </div>
 
                 <div class="grid grid-cols-1 gap-4">
-                    <a href="{{ route('program.create') }}" 
+                    <a href="{{ route('programs.create') }}" 
                        class="group flex items-center justify-start p-4 bg-white/80 dark:bg-gray-700/80 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 border border-blue-100 dark:border-gray-600 hover:border-blue-300">
                         <div class="bg-blue-100/80 dark:bg-blue-900/30 p-3 rounded-full mr-3 group-hover:rotate-6 transition-transform">
                             <svg class="h-6 w-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">

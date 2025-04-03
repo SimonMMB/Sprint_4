@@ -37,31 +37,31 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white/50 dark:bg-gray-800/50 divide-y divide-gray-200/20">
-                                @foreach($sessions as $session)
-                                <tr class="hover:bg-orange-50/30 dark:hover:bg-orange-900/20 transition-colors duration-200 @if($session->status == 'completed') bg-green-200/30 dark:bg-green-800/30 @endif">
+                                @foreach($trainingSessions as $trainingSession)
+                                <tr class="hover:bg-orange-50/30 dark:hover:bg-orange-900/20 transition-colors duration-200 @if($trainingSession->status == 'completed') bg-green-200/30 dark:bg-green-800/30 @endif">
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">
-                                        {{ $session->number_of_session }}
+                                        {{ $trainingSession->number_of_session }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        @if($session->status == 'Completada')
+                                        @if($trainingSession->status == 'Completada')
                                             <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100/80 dark:bg-green-800/80 text-green-800 dark:text-green-200">
-                                                {{ $session->status }}
+                                                {{ $trainingSession->status }}
                                             </span>
-                                        @elseif($session->status == 'Pendiente')
+                                        @elseif($trainingSession->status == 'Pendiente')
                                             <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100/80 dark:bg-yellow-800/80 text-yellow-800 dark:text-yellow-200">
-                                                {{ $session->status }}
+                                                {{ $trainingSession->status }}
                                             </span>
                                         @else
                                             <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100/80 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
-                                                {{ $session->status }}
+                                                {{ $trainingSession->status }}
                                             </span>
                                         @endif
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
-                                        {{ $session->estimated_date }}
+                                        {{ $trainingSession->estimated_date }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-center">
-                                        <a href="{{ route('session.show', $session->id) }}" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition-colors">Ver</a>
+                                        <a href="{{ route('training_sessions.show', $trainingSession->id) }}" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition-colors">Ver</a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -79,10 +79,10 @@
                     </div>
                 </div>
 
-                @if($sessions->hasPages())
+                @if($trainingSessions->hasPages())
                 <div class="mt-6 bg-white/80 dark:bg-gray-700/80 shadow-lg rounded-xl overflow-hidden backdrop-blur-sm">
                     <div class="px-6 py-4 bg-orange-50/30 dark:bg-orange-900/20">
-                        {{ $sessions->links() }}
+                        {{ $trainingSessions->links() }}
                     </div>
                 </div>
                 @endif

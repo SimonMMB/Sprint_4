@@ -3,51 +3,53 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProgramController;
-use App\Http\Controllers\SessionController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TrainingSessionController;
 use App\Models\Exercise;
 
-Route::view('/test-chart', 'test-chart');
 Route::get('/', function () {
     return view('auth.login');
 })->name('login');
 
+Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
 
-Route::controller(UserController::class)->group(function () {
-    Route::get('/users/create', 'create')->name('users.create');
-    Route::post('/users', 'store')->name('users.store');
-});
+Route::post('/users', [UserController::class, 'store'])->name('users.store');
 
 Route::get('/account-deleted', function () {
     return view('auth.account-deleted');
 })->name('account.deleted');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
-    Route::get('/program', [ProgramController::class, 'create'])->name('program.create');
-    Route::post('/store-program', [ProgramController::class, 'store'])->name('program.store');
-    Route::delete('/program/{id}', [ProgramController::class, 'destroy'])->name('program.destroy');
-    Route::get('/my-programs', [ProgramController::class, 'index'])->name('programs.index');
-    Route::get('/program/{program}', [ProgramController::class, 'show'])->name('program.show');
-    Route::get('/session/{session}', [SessionController::class, 'show'])->name('session.show');
-    Route::patch('/session/{session}/{session_exercise}', [SessionController::class, 'update'])->name('session-exercise.complete');
-    Route::get('/exercises/{exercise}/progress', function(Exercise $exercise) {
-        return view('exercise.progress', ['exercise' => $exercise]);
-    })->name('exercises.progress');
+
+    Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
+
+    Route::get('/programs/create', [ProgramController::class, 'create'])->name('programs.create');
+
+    Route::post('/programs', [ProgramController::class, 'store'])->name('programs.store');
+
+    Route::get('/programs', [ProgramController::class, 'index'])->name('programs.index');
+
+    Route::get('/programs/{program}', [ProgramController::class, 'show'])->name('programs.show');
+
+    Route::delete('/programs/{program}', [ProgramController::class, 'destroy'])->name('programs.destroy');
+
+    Route::get('/training-sessions/{trainingSession}', [TrainingSessionController::class, 'show'])->name('training_sessions.show');
+
+    Route::patch('/training-sessions/{trainingSession}/exercises/{sessionExercise}', [TrainingSessionController::class, 'update'])->name('training_sessions.exercises.complete');
     
+    Route::view('/test-chart', 'test-chart');
+
+    Route::get('/exercises/{exercise}/progress', function(Exercise $exercise) {
+        return view('exercises.progress', ['exercise' => $exercise]);
+    })->name('exercises.progress');
+
     Route::get('/delete-account-form', function () {
         return view('profile.partials.delete-user-form');
     })->name('delete.account.form');
 
     Route::delete('/profile', [UserController::class, 'destroy'])->name('profile.destroy');
-   
-    
 
-    Route::resource('programs', ProgramController::class)->except(['show']);
-    Route::resource('sessions', SessionController::class)->except(['show']);
 });
 
-
-
-
 require __DIR__.'/auth.php';
+
+?>

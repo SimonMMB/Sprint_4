@@ -3,14 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Carbon\Carbon; 
 
-class UserSession extends Model
+
+class TrainingSession extends Model
 {
     use HasFactory;
 
@@ -22,16 +20,15 @@ class UserSession extends Model
         'status',
         'comments'
     ];
-    protected $dates = ['estimated_date'];
+    
+    public function program(): BelongsTo
+    {
+        return $this->belongsTo(Program::class);
+    }
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function program(): BelongsTo
-    {
-        return $this->belongsTo(Program::class);
     }
 
     public function sessionExercises(): HasMany
@@ -39,3 +36,5 @@ class UserSession extends Model
         return $this->hasMany(SessionExercise::class);
     }
 }
+
+?>

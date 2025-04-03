@@ -22,10 +22,10 @@ class ExerciseProgressChart extends Component
     {
         $query = SessionExercise::where('exercise_id', $this->exercise->id)
             ->whereNotNull('lifted_weight')
-            ->with('userSession');
+            ->with('trainingSession');
 
         if ($this->timeRange !== 'all') {
-            $query->whereHas('userSession', function($q) {
+            $query->whereHas('trainingSession', function($q) {
                 $q->where('estimated_date', '>=', now()->sub($this->timeRange));
             });
         }
@@ -33,7 +33,7 @@ class ExerciseProgressChart extends Component
         $records = $query->orderBy('created_at')->get();
 
         $this->chartData = [
-            'labels' => $records->pluck('userSession.estimated_date')
+            'labels' => $records->pluck('trainingSession.estimated_date')
                 ->map(fn($date) => \Carbon\Carbon::parse($date)->format('d/m/Y'))
                 ->toArray(),
             'weights' => $records->pluck('lifted_weight')->toArray()

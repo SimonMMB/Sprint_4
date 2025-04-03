@@ -9,19 +9,19 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div class="bg-white/80 dark:bg-gray-700/80 p-4 rounded-lg shadow-sm backdrop-blur-sm">
                         <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Sesión</p>
-                        <p class="text-lg font-semibold text-gray-900 dark:text-white">{{ $session->number_of_session }}</p>
+                        <p class="text-lg font-semibold text-gray-900 dark:text-white">{{ $trainingSession->number_of_session }}</p>
                     </div>
                     <div class="bg-white/80 dark:bg-gray-700/80 p-4 rounded-lg shadow-sm backdrop-blur-sm">
                         <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Fecha Estimada</p>
-                        <p class="text-lg font-semibold text-gray-900 dark:text-white">{{ $session->estimated_date }}</p>
+                        <p class="text-lg font-semibold text-gray-900 dark:text-white">{{ $trainingSession->estimated_date }}</p>
                     </div>
                     <div class="bg-white/80 dark:bg-gray-700/80 p-4 rounded-lg shadow-sm backdrop-blur-sm">
                         <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Estado</p>
-                        <p class="text-lg font-semibold text-gray-900 dark:text-white">{{ $session->status }}</p>
+                        <p class="text-lg font-semibold text-gray-900 dark:text-white">{{ $trainingSession->status }}</p>
                     </div>
                     <div class="bg-white/80 dark:bg-gray-700/80 p-4 rounded-lg shadow-sm backdrop-blur-sm">
                         <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Programa</p>
-                        <a href="{{ route('program.show', $session->program_id) }}" class="text-lg font-semibold text-blue-600 hover:text-blue-800 dark:text-blue-400">Ver Programa</a>
+                        <a href="{{ route('programs.show', ['program' => $trainingSession->program_id]) }}" class="text-lg font-semibold text-blue-600 hover:text-blue-800 dark:text-blue-400">Ver Programa</a>
                     </div>
                 </div>
 
@@ -44,7 +44,7 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white/50 dark:bg-gray-800/50 divide-y divide-gray-200/20">
-                                @foreach ($session->sessionExercises as $sessionExercise)
+                                @foreach ($trainingSession->sessionExercises as $sessionExercise)
                                 <tr class="hover:bg-orange-50/30 dark:hover:bg-orange-900/20 transition-colors duration-200">
                                     <td class="px-4 py-3 text-sm text-gray-900 dark:text-gray-100">
                                         {{ $sessionExercise->status}}
@@ -65,7 +65,7 @@
                                         @if($sessionExercise->status == 'completed')
                                             {{ $sessionExercise->lifted_weight }} kg
                                         @else
-                                            <form action="{{ route('session-exercise.complete', [$session->id, $sessionExercise->id]) }}" method="POST" class="flex items-center space-x-2">
+                                            <form action="{{ route('training_sessions.exercises.complete', [$trainingSession->id, $sessionExercise->id]) }}" method="POST" class="flex items-center space-x-2">
                                                 @csrf
                                                 @method('PATCH')
                                                 <input type="number" name="lifted_weight" min="1" required 
@@ -96,7 +96,7 @@
                 </div>
 
                 <div class="flex justify-center">
-                    <a href="{{ route('program.show', $session->program_id) }}" 
+                    <a href="{{ route('programs.show', ['program' => $trainingSession->program_id]) }}" 
                        class="inline-block bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
                         ← Volver al Programa
                     </a>
