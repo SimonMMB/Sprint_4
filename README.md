@@ -1,7 +1,7 @@
 <a id="readme-top"></a>
 
-<h3 align="center">STAY STRONG</h3>
-<p align="center">Web application for creating and managing personalized training programs, with exercises progress and session tracking.</p>
+<h1 align="center">STAY STRONG</h1>
+<p align="center">Training programs platform</p>
 
 <details>
   <summary>Table of Contents</summary>
@@ -15,29 +15,27 @@
 </details>
 
 ## About The Project
-Web application for creating and managing personalized training programs, with exercises progress and session tracking.
+Web application for creating and managing personalized training programs, with exercises and sessions tracking.
 
 ✨ Key Features
-
-✅ Create programs with custom frequencies and durations
-✅ Log weights lifted for each exercise in every training session and display progress
-✅ Track completed sessions vs. total sessions
-✅ Responsive design (mobile and desktop friendly)
-✅ Secure user authentication
+* ✅ Create programs with custom frequencies and durations
+* ✅ Log weights lifted for each exercise in every training session and display progress
+* ✅ Track completed sessions vs. total sessions
+* ✅ Secure user authentication
 
 <p align="left">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
 
 * **Backend**: Laravel 12
-* **Frontend**: Tailwind CSS + Blade + Livewire
+* **Frontend**: Tailwind CSS + Blade + Livewire + JS
 * **Authentication**: Breeze
 * **Database**: MySQL
 
 <p align="left">(<a href="#readme-top">back to top</a>)</p>
 
 ## Getting Started
-To get a local copy up and running follow these simple example steps.
+To get a local copy up and running follow these simple steps:
 
 1. Clone the repo
    ```sh
@@ -52,23 +50,68 @@ To get a local copy up and running follow these simple example steps.
    php artisan serve
    ```
 4. Start a MySQL server (via XAMPP/WAMP/Laragon/MAMP or standalone).
-5. Run the migrations
+5. Create a DB called 'staystrong'.
+6. Run the migrations
    ```sh
    php artisan migrate
    ```
-6. Seed excercises table
+7. Seed 'excercises' table
    ```sh
    php artisan db:seed --class=ExercisesTableSeeder
    ```
+8. Log in and follow the instructions to create your personalized training programs.
 
 <p align="left">(<a href="#readme-top">back to top</a>)</p>
 
 ## Usage
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+This app empowers you to plan, track, and crush your fitness goals with personalized training programs.
+
+🚀 How It Works
+* Log in to your personal space.
+* Choose two key variables for your(s) program(s):
+         * **Frequency**: How many days per week you want to train.
+         * **Duration**: Your short-term goal timeline (e.g., 4 weeks to boost stamina or build strength).
+         * Set your start date, and the app automatically calculates your end date.
+
+🔥 Your Custom Program
+* The app generates a tailored workout plan based on your preferences. Each session is designed to target all major muscle groups.
+
+📊 Track & Conquer
+* Log the weights you lift for every exercise, marking them as completed. Once all exercises are done, the session is automatically checked as completed. Once all sesions are done, the program is automatically checked as completed.
+
+📈 See Your Progress
+* Real-time stats: Sessions completed, remaining, and overall progress.
+* Visualize your gains: A sleek graph tracks your weight-lifting history for every exercise, so you can see your progress over time.
 
 <p align="left">(<a href="#readme-top">back to top</a>)</p>
 
 ## Comments
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+🚀 Project Overview (regarding Sprint 4 project statement)
+
+📌 LEVEL 1: Architecture & Features
+* MVC Architecture with clean organization:
+   * **Models**: User, Program, Exercise, SessionExercise, TrainingSession.
+   * **Controllers**: AuthenticatedSessionController, UserController, ProgramController, TrainingSessionController.
+   * **Services**: TrainingSessionService.
+   * **Views**: 
+   - Auth: login, forgot-password, account-deleted.
+   - User: create, delete-user-form.
+   - Programs: create, index, show.
+   - Training sessions: show. 
+   - Exercises: progress.
+   - Home: dashboard.
+
+* CRUD Operations:
+   - Users: Create & Delete.
+   - Programs: Create, Read & Delete.
+   - Sessions: Read, Update & Delete.
+
+🔐 LEVEL 2: Security & UX
+* Authentication: Powered by Laravel Breeze.
+* 404 Error Page: Custom-designed to match the app’s aesthetic. Redirects based on login status.
+
+💡 LEVEL 3: Advanced Tech
+* Livewire: Drives dynamic progress-tracking graphs (shows weight lifted per exercise/session).
+* Service Layer: TrainingSessionService handles business logic (clean, maintainable code).
 
 <p align="left">(<a href="#readme-top">back to top</a>)</p>
