@@ -20,9 +20,6 @@
                 </div>
 
                 <div class="p-6">
-                    <div class="mb-6 text-sm text-gray-700 dark:text-gray-300">
-                        {{ __('¿Olvidaste tu contraseña? No hay problema. Solo dinos tu dirección de email y te enviaremos un enlace para que puedas elegir una nueva.') }}
-                    </div>
 
                     @if (session('status'))
                         <div class="mb-4 flex items-center bg-green-50/80 dark:bg-green-900/40 rounded-lg p-3 border-l-4 border-green-500">
@@ -37,9 +34,6 @@
                         @csrf
 
                         <div>
-                            <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                {{ __('Email') }}
-                            </label>
                             <input id="email" 
                                    type="email" 
                                    name="email" 
@@ -60,7 +54,7 @@
 
                         <button type="submit" 
                                 class="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-4 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-[1.02]">
-                            {{ __('Enviar Enlace de Recuperación') }}
+                            {{ __('Enviar enlace') }}
                         </button>
 
                         <div class="text-center pt-4 border-t border-gray-200 dark:border-gray-700 mt-4">

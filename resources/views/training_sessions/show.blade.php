@@ -40,6 +40,7 @@
                 <div class="bg-white/80 dark:bg-gray-700/80 shadow-lg rounded-xl backdrop-blur-sm">
                     <div class="px-6 py-4 border-b border-gray-200/30">
                         <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200">Ejercicios</h3>
+                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Registra el peso levantado en cada ejercicio y luego márcalo como completado para ver tu progreso</p>
                     </div>
                     
                     <div class="overflow-y-auto">
@@ -98,7 +99,7 @@
                                                        class="w-16 px-2 py-1 border border-gray-300 dark:border-gray-600 rounded bg-white/80 dark:bg-gray-700/80 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500">
                                                 <button type="submit" 
                                                         class="bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded-lg shadow-md transition duration-150">
-                                                    ✓
+                                                    Completado
                                                 </button>
                                             </form>
                                         @endif
@@ -121,13 +122,30 @@
                     </div>
                 </div>
 
-                <div class="flex justify-center">
-                    <a href="{{ route('programs.show', ['program' => $trainingSession->program_id]) }}" 
-                       class="inline-block bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
-                        ← Volver al Programa
-                    </a>
+                <div class="flex">
+                    
+                    <div class="flex-1">
+                        <a href="{{ route('programs.show', ['program' => $trainingSession->program_id]) }}" 
+                        class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
+                            ← Volver al Programa
+                        </a>
+                    </div>
+
+                    <div class="flex-1 flex justify-center">
+                        <a href="{{ route('programs.index') }}" 
+                        class="inline-block bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
+                            Mis programas
+                        </a>
+                    </div>
+
+                    <div class="flex-1 flex justify-end">
+                        <a href="{{ route('dashboard') }}" 
+                        class="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
+                            Inicio
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
+        </div>  
     </div>
 </x-app-layout>

@@ -26,59 +26,65 @@
                     </div>
                 @endif
 
-                <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-200/50">
-                        <thead class="bg-orange-500/20 dark:bg-orange-600/20">
-                            <tr>
-                                <th class="px-6 py-3 text-center text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider">Frecuencia</th>
-                                <th class="px-6 py-3 text-center text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider">Duración</th>
-                                <th class="px-6 py-3 text-center text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider">Sesiones completadas</th>
-                                <th class="px-6 py-3 text-center text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white/50 dark:bg-gray-800/50 divide-y divide-gray-200/30">
-                            @foreach ($programs as $program)
-                            <tr class="hover:bg-orange-50/30 dark:hover:bg-orange-900/20 transition-colors duration-200">
-                                <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium text-gray-900 dark:text-gray-100">
-                                    {{ $program->training_frequency }} días/semana
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-900 dark:text-gray-100">
-                                    {{ $program->training_duration }} meses
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-900 dark:text-gray-100">
-                                    {{ $program->completed_sessions }} / {{ $program->total_sessions }}
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium space-x-2">
-                                    <a href="{{ route('programs.show', $program->id) }}" 
-                                       class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition-colors">
-                                        Ver
-                                    </a>
-                                    <span class="text-gray-400">|</span>
-                                    <form action="{{ route('programs.destroy', $program->id) }}" method="POST" class="inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" 
-                                                class="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 transition-colors"
-                                                onclick="return confirm('¿Eliminar este programa? ¡Esta acción no se puede deshacer!')">
-                                            Eliminar
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                @if($programs->isEmpty())
+                    <div class="text-center py-12">
+                        <p class="text-xl font-bold text-orange-500 dark:text-orange-400 mb-2">¡Aún no tienes ninguno!</p>
+                    </div>
+                @else 
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200/50">
+                            <thead class="bg-orange-500/20 dark:bg-orange-600/20">
+                                <tr>
+                                    <th class="px-6 py-3 text-center text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider">Frecuencia</th>
+                                    <th class="px-6 py-3 text-center text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider">Duración</th>
+                                    <th class="px-6 py-3 text-center text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider">Sesiones completadas</th>
+                                    <th class="px-6 py-3 text-center text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white/50 dark:bg-gray-800/50 divide-y divide-gray-200/30">
+                                @foreach ($programs as $program)
+                                <tr class="hover:bg-orange-50/30 dark:hover:bg-orange-900/20 transition-colors duration-200">
+                                    <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium text-gray-900 dark:text-gray-100">
+                                        {{ $program->training_frequency }} días/semana
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-900 dark:text-gray-100">
+                                        {{ $program->training_duration }} meses
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-900 dark:text-gray-100">
+                                        {{ $program->completed_sessions }} / {{ $program->total_sessions }}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium space-x-2">
+                                        <a href="{{ route('programs.show', $program->id) }}" 
+                                        class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition-colors">
+                                            Ver
+                                        </a>
+                                        <span class="text-gray-400">|</span>
+                                        <form action="{{ route('programs.destroy', $program->id) }}" method="POST" class="inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" 
+                                                    class="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 transition-colors"
+                                                    onclick="return confirm('¿Eliminar este programa? ¡Esta acción no se puede deshacer!')">
+                                                Eliminar
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                @endif
 
                 <div class="mt-6">
                     <a href="{{ route('programs.create') }}" 
-                       class="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105">
+                       class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105">
                         + Crear nuevo programa
                     </a>
                     
                     <a href="{{ route('dashboard') }}" 
-                       class="ml-4 bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
-                        ← Volver
+                       class="ml-4 bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
+                        Inicio
                     </a>
                 </div>
 

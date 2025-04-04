@@ -53,24 +53,20 @@
                                         {{ $trainingSession->number_of_session }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-center">
-                                        @if($trainingSession->status == 'Completada')
+                                        @if($trainingSession->status == 'completed')
                                             <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100/80 dark:bg-green-800/80 text-green-800 dark:text-green-200">
-                                                {{ $trainingSession->status }}
-                                            </span>
-                                        @elseif($trainingSession->status == 'Pendiente')
-                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100/80 dark:bg-yellow-800/80 text-yellow-800 dark:text-yellow-200">
-                                                {{ $trainingSession->status }}
+                                                {{'Completada'}}
                                             </span>
                                         @else
-                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100/80 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
-                                                {{ $trainingSession->status }}
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-orange-100/80 dark:bg-orange-800/80 text-orange-800 dark:text-orange-200">
+                                                {{ 'Pendiente' }}
                                             </span>
                                         @endif
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-900 dark:text-gray-100">
                                         {{ $trainingSession->estimated_date }}
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium text-center">
+                                    <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
                                         <a href="{{ route('training_sessions.show', $trainingSession->id) }}" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition-colors">Ver</a>
                                     </td>
                                 </tr>
@@ -83,8 +79,14 @@
                 <div class="mt-6 flex flex-col sm:flex-row justify-between space-y-4 sm:space-y-0 sm:space-x-4">
                     <div class="space-x-4">
                         <a href="{{ route('programs.index') }}" 
-                           class="inline-block bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
-                            ← Volver a mis programas
+                           class="inline-block bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
+                            Mis programas
+                        </a>
+                    </div>
+                    <div class="space-x-4">
+                        <a href="{{ route('dashboard') }}" 
+                           class="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">
+                            Inicio
                         </a>
                     </div>
                 </div>

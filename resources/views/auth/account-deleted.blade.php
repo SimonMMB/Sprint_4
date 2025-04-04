@@ -1,17 +1,4 @@
-<x-app-layout>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wdth,wght@0,75..100,100..900;1,75..100,100..900&display=swap" rel="stylesheet">
-
-    <a href="{{ route('dashboard') }}" class="absolute top-4 left-4 z-50">
-        <div class="bg-orange-500/90 dark:bg-orange-600/90 rounded-lg p-3 shadow-md hover:bg-orange-600 dark:hover:bg-orange-700 transition-colors duration-300">
-            <h2 class="text-xl text-white text-center" style="font-family: 'Roboto', sans-serif; font-style: italic; font-weight: 900; font-stretch: 100%; letter-spacing: -0.05em; line-height: 0.9; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
-                STAY<br>STRONG
-            </h2>
-        </div>
-    </a>
-    
+<x-app-layout>    
     <div class="relative min-h-screen w-full overflow-hidden">
         <div class="fixed inset-0">
             <img 
@@ -30,12 +17,15 @@
                 <div class="p-6 text-center">
                     <div class="mb-6">
                         <p class="mt-4 text-gray-700 dark:text-gray-300">
-                            Todos tus datos han sido eliminados.
+                            Todos tus datos han sido eliminados...
+                        </p>
+                        <p class="mt-6 text-gray-700 dark:text-gray-300 text-lg">
+                            ¿Ya te has arrepentido?
                         </p>
                     </div>
 
-                    <a href="{{ route('login') }}" class="inline-block bg-green-700 hover:bg-green-500 text-white font-semibold py-2 px-4 rounded-lg">
-                        ¿Ya te has arrepentido?<br>¡Vuelve a registrarte!
+                    <a href="{{ route('users.create') }}" class="inline-block bg-green-700 hover:bg-green-500 text-white font-semibold py-2 px-4 rounded-lg">
+                        ¡Vuelve a registrarte!
                     </a>
                 </div>
             </div>

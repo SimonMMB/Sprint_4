@@ -30,11 +30,11 @@
                         @method('DELETE')
 
                         <h3 class="text-lg text-center font-medium text-gray-900 dark:text-gray-100 mb-2">
-                            {{ __('Borrarás los registros de todos tus entrenamientos de manera permanente.') }}
+                            {{ __('Borrarás los registros de todos tus entrenamientos de manera permanente') }}
                         </h3>
 
                         <div class="mt-4">
-                            <x-input-label for="password" value="{{ __('Ingresa tu contraseña para eliminar tu cuenta.') }}" />
+                            <x-input-label for="password" value="{{ __('Ingresa tu contraseña para eliminar tu cuenta') }}" />
 
                             <x-text-input id="password"
                                          name="password"

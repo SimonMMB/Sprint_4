@@ -31,7 +31,7 @@
                         <label for="training_frequency" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                             ¿Cuántos días por semana quieres entrenar?
                         </label>
-                        <select name="training_frequency" id="training_frequency" class="w-full p-3 border border-gray-300 dark:border-gray-600 bg-white/80 dark:bg-gray-700/80 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all text-gray-900 dark:text-white" required>
+                        <select name="training_frequency" id="training_frequency" class="w-full p-3 border border-gray-300 dark:border-gray-600 bg-white/80 dark:bg-gray-700/80 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all text-gray-900 dark:text-white rounded-lg" required>
                             <option value="" disabled selected class="text-gray-500">Seleccionar frecuencia</option>
                             <option value="2">2 días por semana</option>
                             <option value="3">3 días por semana</option>
@@ -44,7 +44,7 @@
                         <label for="training_duration" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                             ¿Durante cuántos meses?
                         </label>
-                        <select name="training_duration" id="training_duration" class="w-full p-3 border border-gray-300 dark:border-gray-600 bg-white/80 dark:bg-gray-700/80 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all text-gray-900 dark:text-white" required>
+                        <select name="training_duration" id="training_duration" class="w-full p-3 border border-gray-300 dark:border-gray-600 bg-white/80 dark:bg-gray-700/80 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all text-gray-900 dark:text-white rounded-lg" required>
                             <option value="" disabled selected class="text-gray-500">Seleccionar duración</option>
                             <option value="2">2 meses</option>
                             <option value="3">3 meses</option>
@@ -61,7 +61,7 @@
                         <input type="date" 
                                name="start_date" 
                                id="start_date" 
-                               class="w-full p-3 border border-gray-300 dark:border-gray-600 bg-white/80 dark:bg-gray-700/80 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all text-gray-900 dark:text-white" 
+                               class="w-full p-3 border border-gray-300 dark:border-gray-600 bg-white/80 dark:bg-gray-700/80 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all text-gray-900 dark:text-white rounded-lg" 
                                value="{{ old('start_date') }}" 
                                required>
                     </div>
@@ -73,18 +73,27 @@
                         <input type="date" 
                                name="estimated_end_date" 
                                id="estimated_end_date" 
-                               class="w-full p-3 border border-gray-300 dark:border-gray-600 bg-gray-100/80 dark:bg-gray-700/80 focus:ring-2 focus:ring-orange-500 cursor-not-allowed text-gray-900 dark:text-white" 
+                               class="w-full p-3 border border-gray-300 dark:border-gray-600 bg-gray-100/80 dark:bg-gray-700/80 focus:ring-2 focus:ring-orange-500 cursor-not-allowed text-gray-900 dark:text-white rounded-lg" 
                                value="{{ old('estimated_end_date') }}" 
                                readonly>
                     </div>
 
-                    <button type="submit" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-4 shadow-md transition duration-300 ease-in-out transform hover:scale-105 mb-4">
+                    <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-4 shadow-md transition duration-300 ease-in-out transform hover:scale-105 mb-4 rounded-lg">
                         Crear programa
                     </button>
 
-                    <a href="{{ route('dashboard') }}" class="block text-center bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 shadow-md transition duration-300 ease-in-out">
-                        ← Volver
-                    </a>
+                    <div class="flex justify-between mt-4"> <!-- Contenedor flex para alinear los enlaces -->
+                        <a href="{{ route('programs.index') }}" 
+                        class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 shadow-md transition duration-300 ease-in-out rounded-lg">
+                            Mis programas
+                        </a>
+
+                        <a href="{{ route('dashboard') }}" 
+                        class="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4 shadow-md transition duration-300 ease-in-out rounded-lg">
+                            Inicio
+                        </a>
+                    </div>
+
                 </form>
             </div>
         </div>
