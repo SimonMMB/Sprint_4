@@ -1,26 +1,7 @@
 <a id="readme-top"></a>
 
-<br />
-<div align="center">
-  <a href="https://github.com/SimonMMB/Sprint_4">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
-
 <h3 align="center">STAY STRONG</h3>
-
-  <p align="center">
-    Web application for creating and managing personalized training programs, with exercises progress and session tracking.
-    <br />
-    <a href="https://github.com/SimonMMB/Sprint_4"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/SimonMMB/Sprint_4">View Demo</a>
-    &middot;
-    <a href="https://github.com/SimonMMB/Sprint_4/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
-    &middot;
-    <a href="https://github.com/SimonMMB/Sprint_4/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
-  </p>
-</div>
+<p align="center">Web application for creating and managing personalized training programs, with exercises progress and session tracking.</p>
 
 <details>
   <summary>Table of Contents</summary>
@@ -29,6 +10,7 @@
     <li><a href="#built-with">Built With</a></li>
     <li><a href="#getting-started">Getting Started</a></li>
     <li><a href="#usage">Usage</a></li>
+    <li><a href="#comments">Comments</a></li>
   </ol>
 </details>
 
@@ -43,17 +25,16 @@ Web application for creating and managing personalized training programs, with e
 ✅ Responsive design (mobile and desktop friendly)
 ✅ Secure user authentication
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="left">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
-* [![Laravel][Laravel.com]][Laravel-url]
 
-**Backend**: Laravel 12
-**Frontend**: Tailwind CSS + Blade + Livewire
-**Authentication**: Breeze
-**Database**: MySQL
+* **Backend**: Laravel 12
+* **Frontend**: Tailwind CSS + Blade + Livewire
+* **Authentication**: Breeze
+* **Database**: MySQL
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="left">(<a href="#readme-top">back to top</a>)</p>
 
 ## Getting Started
 To get a local copy up and running follow these simple example steps.
@@ -80,12 +61,14 @@ To get a local copy up and running follow these simple example steps.
    php artisan db:seed --class=ExercisesTableSeeder
    ```
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="left">(<a href="#readme-top">back to top</a>)</p>
 
 ## Usage
-
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+<p align="left">(<a href="#readme-top">back to top</a>)</p>
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+## Comments
+Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+
+<p align="left">(<a href="#readme-top">back to top</a>)</p>
