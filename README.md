@@ -94,12 +94,12 @@ This app empowers you to plan, track, and crush your fitness goals with personal
    * **Controllers**: AuthenticatedSessionController, UserController, ProgramController, TrainingSessionController.
    * **Services**: TrainingSessionService.
    * **Views**: 
-   - Auth: login, forgot-password, account-deleted.
-   - User: create, delete-user-form.
-   - Programs: create, index, show.
-   - Training sessions: show. 
-   - Exercises: progress.
-   - Home: dashboard.
+         - Auth: login, forgot-password, account-deleted.
+         - User: create, delete-user-form.
+         - Programs: create, index, show.
+         - Training sessions: show. 
+         - Exercises: progress.
+         - Home: dashboard.
 
 * CRUD Operations:
    - Users: Create & Delete.
