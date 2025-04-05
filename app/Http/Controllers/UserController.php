@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Services\TrainingSessionService;
-use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -108,13 +107,12 @@ class UserController extends Controller
 
         $user = $request->user();
         
-        Auth::logout();
+        auth()->logout();
         $user->delete();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        // Redirige a una ruta específica de confirmación
         return redirect()->route('account.deleted');
     }
 }

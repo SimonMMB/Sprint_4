@@ -37,7 +37,8 @@ class ProgramController extends Controller
             $validated['training_frequency'], 
             $validated['training_duration'], 
             $validated['start_date'], 
-            $validated['estimated_end_date']);
+            $validated['estimated_end_date'
+        ]);
 
         return redirect()->route('programs.index');
     }
