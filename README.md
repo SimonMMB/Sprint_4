@@ -17,20 +17,19 @@
 ## About The Project
 Web application for creating and managing personalized training programs, with exercises and sessions tracking.
 
-✨ Key Features
-* ✅ Create programs with custom frequencies and durations
-* ✅ Log weights lifted for each exercise in every training session and display progress
-* ✅ Track completed sessions vs. total sessions
-* ✅ Secure user authentication
+✨ Key Features<br>
+✅ Create programs with custom frequencies and durations.<br>
+✅ Log weights lifted for each exercise in every training session and display progress.<br>
+✅ Track completed sessions vs. total sessions.<br>
+✅ Secure user authentication.
 
 <p align="left">(<a href="#readme-top">back to top</a>)</p>
 
-### Built With
-
-* **Backend**: Laravel 12
-* **Frontend**: Tailwind CSS + Blade + Livewire + JS
-* **Authentication**: Breeze
-* **Database**: MySQL
+### Built With<br>
+⚙️ **Backend**: Laravel 12<br>
+🖥️ **Frontend**: Tailwind CSS + Blade + Livewire + JS<br>
+🔑 **Authentication**: Breeze<br>
+🗄️ **Database**: MySQL
 
 <p align="left">(<a href="#readme-top">back to top</a>)</p>
 
@@ -68,16 +67,16 @@ This app empowers you to plan, track, and crush your fitness goals with personal
 
 🚀 How It Works
 * Log in to your personal space.
-* Choose two key variables for your(s) program(s):
-         * **Frequency**: How many days per week you want to train.
-         * **Duration**: Your short-term goal timeline (e.g., 4 weeks to boost stamina or build strength).
-         * Set your start date, and the app automatically calculates your end date.
+* Choose two key variables for your(s) program(s):<br>
+         1- **Frequency**: How many days per week you want to train.<br>
+         2- **Duration**: Your short-term goal timeline (e.g., 4 weeks to boost stamina or build strength).<br>
+* Set your start date, the app calculates your end date.
 
 🔥 Your Custom Program
 * The app generates a tailored workout plan based on your preferences. Each session is designed to target all major muscle groups.
 
 📊 Track & Conquer
-* Log the weights you lift for every exercise, marking them as completed. Once all exercises are done, the session is automatically checked as completed. Once all sesions are done, the program is automatically checked as completed.
+* Log the weights you lift for every exercise, marking them as completed. Once all exercises are done, the session is automatically checked as completed. Once all sesions are done, the training program is automatically checked as completed.
 
 📈 See Your Progress
 * Real-time stats: Sessions completed, remaining, and overall progress.
@@ -88,29 +87,42 @@ This app empowers you to plan, track, and crush your fitness goals with personal
 ## Comments
 🚀 Project Overview (regarding Sprint 4 project statement)
 
-📌 LEVEL 1: Architecture & Features
-* MVC Architecture with clean organization:
-   * **Models**: User, Program, Exercise, SessionExercise, TrainingSession.
-   * **Controllers**: AuthenticatedSessionController, UserController, ProgramController, TrainingSessionController.
-   * **Services**: TrainingSessionService.
-   * **Views**: 
-         - Auth: login, forgot-password, account-deleted.
-         - User: create, delete-user-form.
-         - Programs: create, index, show.
-         - Training sessions: show. 
-         - Exercises: progress.
-         - Home: dashboard.
+📌 **LEVEL 1** - Architecture & Features
+* MVC Architecture:
+   * **Models**:<br> 
+         - User<br>
+         - Program<br>
+         - Exercise<br>
+         - SessionExercise<br> 
+         - TrainingSession<br>
+   
+   * **Controllers**:<br>
+         - AuthenticatedSessionController<br>
+         - UserController<br>
+         - ProgramController<br>
+         - TrainingSessionController<br>
+
+   * **Services**:<br> 
+         - TrainingSessionService<br>
+
+   * **Views**:<br> 
+         - Auth: login, forgot-password, account-deleted<br>
+         - User: create, delete-user-form<br>
+         - Programs: create, index, show<br>
+         - Training sessions: show<br>
+         - Exercises: progress<br>
+         - Home: dashboard
 
 * CRUD Operations:
    - Users: Create & Delete.
    - Programs: Create, Read & Delete.
-   - Sessions: Read, Update & Delete.
+   - Sessions: Read & Update.
 
-🔐 LEVEL 2: Security & UX
+🔐 **LEVEL 2** - Security & UX
 * Authentication: Powered by Laravel Breeze.
 * 404 Error Page: Custom-designed to match the app’s aesthetic. Redirects based on login status.
 
-💡 LEVEL 3: Advanced Tech
+💡 **LEVEL 3** - Libraries & services
 * Livewire: Drives dynamic progress-tracking graphs (shows weight lifted per exercise/session).
 * Service Layer: TrainingSessionService handles business logic (clean, maintainable code).
 

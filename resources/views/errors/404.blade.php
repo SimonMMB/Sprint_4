@@ -10,7 +10,7 @@
                     STAY<br>STRONG
                 </h2>
             </div>
-        </a>
+    </a>
 
 
     <div class="relative min-h-screen w-full overflow-hidden">
@@ -37,19 +37,7 @@
                             La página que buscas no existe o ha sido movida
                         </p>
                     </div>
-
-                    @auth
-                        <form action="{{ route('logout') }}" method="POST">
-                            @csrf
-                            <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg">
-                                Cerrar sesión
-                            </button>
-                        </form>
-                    @else
-                        <a href="{{ route('dashboard') }}" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg">
-                            Volver
-                        </a>
-                    @endauth
+                    <a href="{{ route('dashboard') }}" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg">Volver</a>
                 </div>
             </div>
         </div>
