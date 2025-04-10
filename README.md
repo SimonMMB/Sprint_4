@@ -36,29 +36,34 @@ Web application for creating and managing personalized training programs, with e
 ## Getting Started
 To get a local copy up and running follow these simple steps:
 
-1. Clone the repo
+1. Clone the repo:
    ```sh
    git clone https://github.com/SimonMMB/Sprint_4.git
    ```
-2. Run NPM 
+2. Copy .env.example to .env.<br>
+3. Run: 
    ```sh
-   npm run dev
+   php artisan key:generate
    ```
-3. Run PHP built-in web server 
-   ```sh
-   php artisan serve
-   ```
-4. Start a MySQL server (via XAMPP/WAMP/Laragon/MAMP or standalone).
-5. Create a DB called 'staystrong'.
-6. Run the migrations
+4. Configure your DB credentials in .env.<br>
+5. Start a MySQL server (via XAMPP/WAMP/Laragon/MAMP or standalone) and create a DB called 'staystrong'.
+6. Run the migrations:
    ```sh
    php artisan migrate
    ```
-7. Seed 'excercises' table
+7. Seed 'excercises' table:
    ```sh
    php artisan db:seed --class=ExercisesTableSeeder
    ```
-8. Log in and follow the instructions to create your personalized training programs.
+8. Run NPM: 
+   ```sh
+   npm run dev
+   ```
+9. Run PHP built-in web server: 
+   ```sh
+   php artisan serve
+   ```
+10. Log in and follow the instructions to create your personalized training programs.
 
 <p align="left">(<a href="#readme-top">back to top</a>)</p>
 
